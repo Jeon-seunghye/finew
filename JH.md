@@ -11,3 +11,8 @@
 
 
 - 주석 제대로 꼼꼼하게 달아놓기
+
+
+
+# ERD
+https://app.diagrams.net/#G1KzrGj9mQSHa9D9jBgbgCe9eCekaPpUD9
