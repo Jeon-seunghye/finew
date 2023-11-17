@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-# from rest_framework.authentication import TokenAuthentication, BasicAuthentication
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.shortcuts import render
 from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer
@@ -16,6 +16,8 @@ from .models import Article, Comment
 
 # 게시글
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def article_list(request):
     # 게시글 전체 조회
     if request.method == 'GET':

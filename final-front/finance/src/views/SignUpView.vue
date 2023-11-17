@@ -15,13 +15,13 @@
             <input type="password" id="password2" v-model.trim="password2" placeholder="비밀번호 재입력">
           </div>
           <div class="box">
-            <input type="number" id="age" v-model.trim="number" placeholder="나이">
+            <input type="number" id="age" v-model.trim="age" placeholder="나이">
           </div>
           <div class="box">
-            <input type="number" id="money" v-model.trim="number" placeholder="잔고">
+            <input type="number" id="money" v-model.trim="money" placeholder="잔고">
           </div>
           <div class="box">
-            <input type="number" id="salary" v-model.trim="password2" placeholder="연봉 ( 단위 : 천만원 )">
+            <input type="number" id="salary" v-model.trim="salary" placeholder="연봉 ( 단위 : 천만원 )">
           </div>
           <div class="box" style=" text-align: center;">
           <input type="submit" style="display: inline-block;" value="가입하기">
@@ -41,12 +41,19 @@
   const username = ref(null)
   const password1 = ref(null)
   const password2 = ref(null)
+  const age = ref(null)
+  const money = ref(null)
+  const salary = ref(null)
+
 
   const signUp = function () {
       const payload = {
           username: username.value,
           password1: password1.value,
-          password2: password2.value
+          password2: password2.value,
+          age: age.value,
+          money: money.value,
+          salary: salary.value
       }
       store.signUp(payload)
   }
