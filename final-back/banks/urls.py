@@ -10,5 +10,4 @@ urlpatterns = [
     path('savings/', views.saving_list),    # 적금 전체 조회
     path('saving/<int:saving_pk>/', views.saving_detail),   # 적금 상세정보
     path('exchange_rate/', views.exchange_rate),    # 환율 계산기
-
 ]

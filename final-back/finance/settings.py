@@ -35,14 +35,14 @@ INSTALLED_APPS = [
     'articles',
     'banks',
     'rest_framework',
-    # 'corsheaders.middleware.CorsMiddleware',    # cors
-    # 'rest_framework.authtoken', # 토큰 인증
-    # 'dj_rest_auth',
-    # 'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'dj_rest_auth.registration',
+    'corsheaders.middleware.CorsMiddleware',    # cors
+    'rest_framework.authtoken', # 토큰 인증
+    'dj_rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
 
 
 
