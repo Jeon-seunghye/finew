@@ -94,13 +94,5 @@ const router = createRouter({
     },
   ]
 })
-router.beforeEach((to, from) => {
-  const store = useArticleStore()
-  if (!store.isLogin && to.name === 'home') {
-    console.log('로그인이 필요합니다.')
-    return { name: 'signin' }
-  }
-})
-
 
 export default router

@@ -91,6 +91,20 @@ export const useArticleStore = defineStore('article', () => {
         console.log(error)
       })
   }
+  // 로그아웃 함수
+  const logOut = function () {
+    axios({
+      method: 'post',
+      url: `${API_URL}/accounts/logout/`,
+    })
+      .then((res) => {
+        token.value = null
+        router.push({ name: 'home' })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
-  return { articles, API_URL, token, isLogin, getArticles, createArticle, signUp, signIn }
+  return { articles, API_URL, token, isLogin, getArticles, createArticle, signUp, signIn, logOut }
 }, { persist: true })
