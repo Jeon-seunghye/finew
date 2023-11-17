@@ -1,12 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { useArticleStore } from './stores/article'
+const store = useArticleStore()
 </script>
 
 <template>
   <header>
     <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
-    <div>
-      <nav class="navbar bg-body-tertiary fixed-top">
+    <div  class="position relative">
+      <nav class="navbar bg-body-tertiary sticky-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">Finew</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -23,10 +25,10 @@ import { RouterLink, RouterView } from 'vue-router'
                   <a href="/" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a href="/signup" class="nav-link">회원가입</a>
+                  <a href="/signup" class="nav-link" v-if="!store.isLogin">회원가입</a>
                 </li>
                 <li class="nav-item">
-                  <a href="/login" class="nav-link">로그인</a>
+                  <a href="/login" class="nav-link" v-if="!store.isLogin">로그인</a>
                 </li>
                 <li class="nav-item">
                   <a href="/compare" class="nav-link">예적금비교</a>

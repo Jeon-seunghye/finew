@@ -1,10 +1,11 @@
 <template>
   <main>
-    <h1>HOMEVIEW</h1>
+    <h1>예금 상세</h1>
   </main>
 </template>
 
 <script setup>
+
 </script>
 
 <style scoped>

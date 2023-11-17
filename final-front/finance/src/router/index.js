@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, useRouter } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
@@ -11,7 +11,7 @@ import MapView from '@/views/MapView.vue'
 import DepositView from '@/views/DepositView.vue'
 import SavingView from '@/views/SavingView.vue'
 import CompareView from '@/views/CompareView.vue'
-
+import { useArticleStore } from '@/stores/article'
 
 
 
@@ -26,12 +26,26 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: LoginView
+      component: LoginView,
+      beforeEnter: (to, from) => {
+        const store = useArticleStore()
+        if (store.isLogin === true) {
+          console.log('이미로그인됨')
+          return {name: 'home'}
+        }
+      }
     },
     {
       path: '/signup',
       name: 'signup',
-      component: SignUpView
+      component: SignUpView,
+      beforeEnter: (to, from) => {
+        const store = useArticleStore()
+        if (store.isLogin === true) {
+          console.log('이미로그인됨')
+          return {name: 'home'}
+        }
+      }
     },
     {
       path: '/calculator',
@@ -80,5 +94,13 @@ const router = createRouter({
     },
   ]
 })
+router.beforeEach((to, from) => {
+  const store = useArticleStore()
+  if (!store.isLogin && to.name === 'home') {
+    console.log('로그인이 필요합니다.')
+    return { name: 'signin' }
+  }
+})
+
 
 export default router

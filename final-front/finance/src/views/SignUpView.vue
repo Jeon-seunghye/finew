@@ -1,11 +1,79 @@
 <template>
-  <main>
-    <h1>signuppage</h1>
-  </main>
+  <div class="container">
+      <h2>SIGN UP</h2>
+      <form @submit.prevent="signUp">
+          <div class="box">
+            <!-- <label for="username">username :&nbsp</label> -->
+            <input type="text" id="username" v-model.trim="username" placeholder="아이디 입력">
+          </div>
+          <div class="box">
+            <!-- <label for="password1">password : &nbsp</label> -->
+            <input type="password" id="password1" v-model.trim="password1" placeholder="비밀번호">
+          </div>
+          <div class="box">
+            <!-- <label for="password2">password Confirmation : </label> -->
+            <input type="password" id="password2" v-model.trim="password2" placeholder="비밀번호 재입력">
+          </div>
+          <div class="box">
+            <input type="number" id="age" v-model.trim="number" placeholder="나이">
+          </div>
+          <div class="box">
+            <input type="number" id="money" v-model.trim="number" placeholder="잔고">
+          </div>
+          <div class="box">
+            <input type="number" id="salary" v-model.trim="password2" placeholder="연봉 ( 단위 : 천만원 )">
+          </div>
+          <div class="box" style=" text-align: center;">
+          <input type="submit" style="display: inline-block;" value="가입하기">
+        </div>
+      </form>
+  </div>
 </template>
 
+
+
 <script setup>
+  import {ref} from 'vue'
+  import { useArticleStore } from '@/stores/article'
+
+  const store = useArticleStore()
+
+  const username = ref(null)
+  const password1 = ref(null)
+  const password2 = ref(null)
+
+  const signUp = function () {
+      const payload = {
+          username: username.value,
+          password1: password1.value,
+          password2: password2.value
+      }
+      store.signUp(payload)
+  }
 </script>
 
+
 <style scoped>
+  .container{
+    background-color: whitesmoke ;
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    margin: 100px auto;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+  }
+  
+  .box{
+    margin-top: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
 </style>
