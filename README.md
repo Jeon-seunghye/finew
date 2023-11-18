@@ -1,10 +1,34 @@
-# final-pjt
+# 금융 상품 비교 애플리케이션
 
 ### Notion
 https://www.notion.so/FINAL_Project-7e36177430464c5ab9bf6b771ec3cba9?pvs=4
 
-### ERD
-https://app.diagrams.net/#G1KzrGj9mQSHa9D9jBgbgCe9eCekaPpUD9
+
+
+## 팀원 정보 및 업무 분담 내역
+  ### 전승혜 (팀장)
+    - 부
+  ### 김재훈 (팀원)
+    - 드장고
+## 설계 내용(아키텍처 등) 및 실제 구현 정도
+## 데이터베이스 모델링 (ERD)
+  - https://app.diagrams.net#G1KzrGj9mQSHa9D9jBgbgCe9eCekaPpUD9
+## 금융 상품 추천 알고리즘에 대한 기술적 설명
+
+## 서비스 대표 기능들에 대한 설명
+
+## 기타(느낀 점, 후기 등)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -26,8 +50,8 @@ https://app.diagrams.net/#G1KzrGj9mQSHa9D9jBgbgCe9eCekaPpUD9
     - API 요청 받아서 DB에 저장
     - USER 필드 커스텀
 ### 할 것
-1. README 작성 (요구사항 따라서)
-2. ERD 그리기
+1. 요구사항 따라서 README 작성
+2. ERD 그리기 (완료)
 3. 프론트 [예적금] 부분 하자 !
 
 

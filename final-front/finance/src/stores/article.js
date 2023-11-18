@@ -20,7 +20,7 @@ export const useArticleStore = defineStore('article', () => {
   const getArticles = function () {
     axios({
       method: 'get',
-      url: `${API_URL}/api/v1/articles/`,
+      url: `${API_URL}/articles/`,
       headers: {
         Authorization: `Token ${token.value}`
       }
@@ -28,10 +28,10 @@ export const useArticleStore = defineStore('article', () => {
     .then(res => articles.value = res.data)
   }
   // 게시글 만드는 함수
-  const createArticle = function ({ title, content}) {
+  const createArticle = function ({title, content}) {
     axios({
       method: 'post',
-      url: `${API_URL}/api/v1/articles/`,
+      url: `${API_URL}/articles/`,
       data: {
         title,
         content
@@ -44,6 +44,9 @@ export const useArticleStore = defineStore('article', () => {
       console.log(res)
       router.push({name:'home'})
     })
+    .catch((error) => {
+      console.log(error)
+    })
   }
   // 회원가입 함수
   const signUp = function (payload) {
@@ -55,7 +58,10 @@ export const useArticleStore = defineStore('article', () => {
         username,
         password1,
         password2,
-
+        email,
+        age,
+        money,
+        salary,
       }
     })
       .then((response) => {

@@ -3,10 +3,10 @@
     <h1>게시글 생성 페이지</h1>
     <form @submit.prevent="submitData">
       <label for="title">제목 : </label>
-      <input type="text" id="title" v-model="title">
+      <input type="text" id="title" v-model.trim="title">
 
       <label for="content">내용 : </label>
-      <input type="text" id="content" v-model="content">
+      <input type="text" id="content" v-model.trim="content">
 
       <button @submit.prevent="submitData">create</button>
     </form>
