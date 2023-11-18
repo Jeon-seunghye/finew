@@ -28,7 +28,7 @@ def article_list(request):
     elif request.method == 'POST':
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -54,6 +54,8 @@ def article_detail(request, article_pk):
 
 
 # 댓글 생성
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 @api_view(['POST'])
 def comment_create(request, article_pk):
     article = Article.objects.get(pk=article_pk)
@@ -64,6 +66,8 @@ def comment_create(request, article_pk):
 
 
 # 댓글 삭제
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 @api_view(['DELETE'])
 def comment_delete(request, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
