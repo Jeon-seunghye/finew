@@ -158,6 +158,10 @@ def saving_detail(request, saving_pk):
         serializers = SavingBaseSerializers(saving)
         return Response(serializers.data)
     
-# 환율 계산기
+# 환율 계산기 (환율 전체 json으로 받아오기)
+@api_view(['GET'])
 def exchange_rate(request):
-    pass
+    if request.method == 'GET':
+        exchange_rate = ExchangeRate.objects.all()
+        serializers = ExchangeRateSerializers(exchange_rate, many=True)
+        return Response(serializers.data)
