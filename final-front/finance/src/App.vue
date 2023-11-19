@@ -1,8 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { useArticleStore } from './stores/article'
-const store = useArticleStore()
-</script>
 
 <template>
   <header>
@@ -24,13 +19,19 @@ const store = useArticleStore()
                 <li class="nav-item">
                   <a href="/" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item">
-                  <a href="/signup" class="nav-link" v-if="!store.isLogin">회원가입</a>
-                </li>
-                <li class="nav-item">
-                  <a href="/login" class="nav-link" v-if="!store.isLogin">로그인</a>
-                  <a href="/home" class="nav-link" v-else-if="store.isLogin">로그아웃</a>
-                </li>
+                <div v-if="store.isLogin">
+                  <li class="nav-item">
+                    <a href="/" @click.prevent="store.logOut" class="nav-link">로그아웃</a>
+                  </li>
+                </div>
+                <div v-else>
+                  <li class="nav-item">
+                    <a href="/signup" class="nav-link" v-if="!store.isLogin">회원가입</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/login" class="nav-link" v-if="!store.isLogin">로그인</a>
+                  </li>
+                </div>
                 <li class="nav-item">
                   <a href="/compare" class="nav-link">예적금비교</a>
                 </li>
@@ -68,6 +69,13 @@ const store = useArticleStore()
 
   <RouterView />
 </template>
+
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+import { useArticleStore } from './stores/article'
+const store = useArticleStore()
+</script>
+
 
 <style scoped>
 

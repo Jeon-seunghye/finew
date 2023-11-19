@@ -47,10 +47,11 @@
   const username = ref(null)
   const password1 = ref(null)
   const password2 = ref(null)
-  const email = ref(null)
+  const email = ref('')
   const age = ref(null)
   const money = ref(null)
   const salary = ref(null)
+  const nickname = ref(null)
 
   const signUp = function () {
       const payload = {
@@ -61,6 +62,7 @@
           age: age.value,
           money: money.value,
           salary: salary.value,
+          nickname: nickname.value,
       }
       store.signUp(payload)
   }
