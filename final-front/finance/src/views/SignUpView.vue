@@ -15,19 +15,19 @@
             <input type="password" id="password2" v-model.trim="password2" placeholder="비밀번호 재입력">
           </div>
           <div class="box">
-            <input type="email" id="email" v-model.trim="email" placeholder="이메일">
+            <input type="email" id="email" v-model="email" placeholder="이메일">
           </div>
           <div class="box">
-            <input type="nickname" id="nickname" v-model.trim="nickname" placeholder="닉네임">
+            <input type="text" id="nickname" v-model.trim="nickname" placeholder="닉네임">
           </div>
           <div class="box">
-            <input type="age" id="age" v-model.trim="age" placeholder="나이">
+            <input type="number" id="age" v-model.trim="age" placeholder="나이">
           </div>
           <div class="box">
-            <input type="money" id="money" v-model.trim="money" placeholder="잔고">
+            <input type="number" id="money" v-model.trim="money" placeholder="잔고">
           </div>
           <div class="box">
-            <input type="salary" id="salary" v-model.trim="salary" placeholder="연봉">
+            <input type="number" id="salary" v-model.trim="salary" placeholder="연봉">
           </div>
           <div class="box" style=" text-align: center;">
           <input type="submit" style="display: inline-block;" value="가입하기">
@@ -47,10 +47,11 @@
   const username = ref(null)
   const password1 = ref(null)
   const password2 = ref(null)
-  const email = ref(null)
+  const email = ref('')
   const age = ref(null)
   const money = ref(null)
   const salary = ref(null)
+  const nickname = ref(null)
 
   const signUp = function () {
       const payload = {
@@ -61,6 +62,7 @@
           age: age.value,
           money: money.value,
           salary: salary.value,
+          nickname: nickname.value,
       }
       store.signUp(payload)
   }
