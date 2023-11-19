@@ -8,7 +8,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import ArticleList from '@/components/ArticleList.vue';
+import ArticleList from '../components/ArticleList.vue';
 const router = useRouter()
 </script>
 
