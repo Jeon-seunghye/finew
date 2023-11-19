@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 
 export const useArticleStore = defineStore('article', () => {
   const articles = ref([])
+  const exchange_rates = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   const router = useRouter()
@@ -110,7 +111,20 @@ export const useArticleStore = defineStore('article', () => {
         console.log(err)
       })
   }
+    // 환율 불러오는 함수
+    const getExchangeRate = function () {
+      axios({
+        method: 'get',
+        url: `${API_URL}/banks/exchange_rate/`,
+      })
+      .then((res) => {
+        exchange_rates.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
 
 
-  return { articles, API_URL, token, isLogin, getArticles, createArticle, signUp, signIn, logOut }
+  return { articles, API_URL, token, isLogin, exchange_rates, getArticles, createArticle, signUp, signIn, logOut, getExchangeRate }
 }, { persist: true })
