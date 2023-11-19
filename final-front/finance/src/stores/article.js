@@ -50,7 +50,7 @@ export const useArticleStore = defineStore('article', () => {
   }
   // 회원가입 함수
   const signUp = function (payload) {
-    const {username, password1, password2} = payload
+    const {username, password1, password2, email, age, money, salary, nickname} = payload
     axios({
       method: 'post',
       url: `${API_URL}/accounts/signup/`,
@@ -62,6 +62,7 @@ export const useArticleStore = defineStore('article', () => {
         age,
         money,
         salary,
+        nickname,
       }
     })
       .then((response) => {
@@ -109,6 +110,7 @@ export const useArticleStore = defineStore('article', () => {
         console.log(err)
       })
   }
+
 
   return { articles, API_URL, token, isLogin, getArticles, createArticle, signUp, signIn, logOut }
 }, { persist: true })
