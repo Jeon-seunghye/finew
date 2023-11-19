@@ -1,24 +1,26 @@
+
 <template>
   <div>
-    <h1>Detail</h1>
-    <div v-if="article">
-      <p>제목 : {{ article.title }}</p>
-      <p>내용 : {{ article.content }}</p>
-      <p>작성일 : {{ article.created_at }}</p>
-      <p>수정일 : {{ article.updated_at }}</p>
-    </div>
+    <h1 class="post-title">{{ article.title }}</h1>
+    <p class="post-content">{{ article.content }}</p>
+    <p>제목 : {{ article.title }}</p>
+    <p>내용 : {{ article.content }}</p>
+    <p>작성일 : {{ article.created_at }}</p>
+    <p>수정일 : {{ article.updated_at }}</p>
+    <button @click="deleteArticle" class="delete-button">게시글 삭제</button>
   </div>
 </template>
 
 <script setup>
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
-import { useArticleStore } from '@/stores/article'
-import { useRoute } from 'vue-router'
+import { ref, onMounted } from 'vue';
+import { useArticleStore } from '@/stores/article';
+import { useRoute, useRouter } from 'vue-router'
 
-const store = useArticleStore()
 const route = useRoute()
-const article = ref(null)
+const store = useArticleStore();
+const article = ref({})
+const router = useRouter();
 
 onMounted(() => {
   axios({
@@ -34,8 +36,39 @@ onMounted(() => {
     })
 })
 
+const deleteArticle = () => {
+  axios({
+    method: 'delete',
+    url: `${store.API_URL}/articles/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${store.token}`
+    }
+  })
+    .then(() => {
+      // Redirect to the board or home page after deletion
+      router.push({ name: 'board' })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
 </script>
 
-<style>
+<style scoped>
+.post-title {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 28px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #3498db;
+}
 
+.post-content {
+  font-size: 18px;
+  color: #2c3e50;
+  margin-top: 10px;
+}
 </style>
+

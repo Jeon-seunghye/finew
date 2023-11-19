@@ -65,9 +65,10 @@ const router = createRouter({
       component: PostCreateView
     },
     {
-      path: '/postdetail',
+      path: '/postdetail/:id',
       name: 'postdetail',
-      component: PostDetailView
+      component: PostDetailView,
+      props: true
     },
     {
       path: '/profile',
