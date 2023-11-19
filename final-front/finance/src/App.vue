@@ -29,7 +29,7 @@ const store = useArticleStore()
                 </li>
                 <li class="nav-item">
                   <a href="/login" class="nav-link" v-if="!store.isLogin">로그인</a>
-                  <a href="/" class="nav-link" v-else-if="store.isLogin">로그아웃</a>
+                  <a href="/home" class="nav-link" v-else-if="store.isLogin">로그아웃</a>
                 </li>
                 <li class="nav-item">
                   <a href="/compare" class="nav-link">예적금비교</a>
