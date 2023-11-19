@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-# from rest_framework.authentication import TokenAuthentication, BasicAuthentication
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -12,7 +12,6 @@ import requests
 
 # 인증이 필요한 요소들에게 데코레이터 등록 (401)
 ## @authentication_classes([TokenAuthentication, BasicAuthentication])
-
 # 권한 정책 설정 (403)
 ## @permission_classes([IsAuthenticated])
 
@@ -160,6 +159,8 @@ def saving_detail(request, saving_pk):
     
 # 환율 계산기 (환율 전체 json으로 받아오기)
 @api_view(['GET'])
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def exchange_rate(request):
     if request.method == 'GET':
         exchange_rate = ExchangeRate.objects.all()
