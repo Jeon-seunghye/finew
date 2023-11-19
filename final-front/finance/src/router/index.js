@@ -11,7 +11,6 @@ import MapView from '@/views/MapView.vue'
 import DepositView from '@/views/DepositView.vue'
 import SavingView from '@/views/SavingView.vue'
 import CompareView from '@/views/CompareView.vue'
-import ExchangeView from '@/views/ExchangeView.vue'
 
 import { useArticleStore } from '@/stores/article'
 
@@ -95,11 +94,7 @@ const router = createRouter({
       name: 'saving',
       component: SavingView
     },
-    {
-      path: '/exchange',
-      name: 'exchange',
-      component: ExchangeView
-    },
+    
   ]
 })
 
