@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 
 
 export const useArticleStore = defineStore('article', () => {
-  const articleStore = useArticleStore()
   const articles = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
@@ -51,7 +50,7 @@ export const useArticleStore = defineStore('article', () => {
   }
   // 회원가입 함수
   const signUp = function (payload) {
-    const {username, password1, password2, email, age, money, salary, nickname} = payload
+    const {username, password1, password2} = payload
     axios({
       method: 'post',
       url: `${API_URL}/accounts/signup/`,
@@ -63,7 +62,6 @@ export const useArticleStore = defineStore('article', () => {
         age,
         money,
         salary,
-        nickname,
       }
     })
       .then((response) => {
@@ -111,47 +109,6 @@ export const useArticleStore = defineStore('article', () => {
         console.log(err)
       })
   }
-  // 회원정보 업데이트 함수
-  const updateMember = function (payload) {
-    // payload에서 변경할 회원 정보 추출
-    const { username, email, age, money, salary, nickname } = payload;
-  
-    axios({
-      method: 'put',
-      url: `${API_URL}/accounts/profile/`,
-      data: {
-        username,
-        email,
-        age,
-        money,
-        salary,
-        nickname,
-      },
-      headers: {
-        Authorization: `Token ${token.value}`,
-      },
-    })
-      .then((response) => {
-        console.log('회원 정보 업데이트 완료:', response.data);
-        token.value = response.data.key
-      })
-      .catch((error) => {
-        console.error('회원 정보 업데이트 중 오류 발생:', error);
-        // 오류 처리 (예: 사용자에게 오류 메시지 표시)
-      });
-  };
-  // 회원 탈퇴 함수
-  const deleteMember = function(){
-    articleStore.deleteMember()
-    .then(()=>{
-      console.log('회원탈퇴완료')
-    })
-    .catch((error) => {
-      console.error('회원탈퇴 중 오류 발생:', error);
-    });
-  }
-  
-  
 
-  return { articles, API_URL, token, isLogin, getArticles, createArticle, signUp, signIn, logOut, updateMember, deleteMember }
+  return { articles, API_URL, token, isLogin, getArticles, createArticle, signUp, signIn, logOut }
 }, { persist: true })
