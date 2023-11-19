@@ -42,7 +42,7 @@ export const useArticleStore = defineStore('article', () => {
     })
     .then((res) => {
       console.log(res)
-      router.push({name:'home'})
+      router.push({name:'board'})
     })
     .catch((error) => {
       console.log(error)

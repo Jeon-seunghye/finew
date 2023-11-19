@@ -5,7 +5,7 @@
         v-for="article in store.articles"
         :key="article.pk"
       >
-        <h3>{{ article.pk }}번 게시글</h3>
+        <h3>{{ article.id }}번 게시글</h3>
         <p>작성자 : {{ article.user.username }}</p>
         <p>제목 : {{ article.title }}</p>
         <p>내용 : {{ article.content }}</p>
