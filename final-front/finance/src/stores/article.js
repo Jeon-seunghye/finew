@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 
 export const useArticleStore = defineStore('article', () => {
   const articles = ref([])
+  const comments = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   const router = useRouter()
@@ -27,7 +28,7 @@ export const useArticleStore = defineStore('article', () => {
     })
     .then(res => articles.value = res.data)
   }
-  // 게시글 만드는 함수
+  // 게시글 생성 함수
   const createArticle = function ({title, content}) {
     axios({
       method: 'post',
@@ -47,6 +48,17 @@ export const useArticleStore = defineStore('article', () => {
     .catch((error) => {
       console.log(error)
     })
+  }
+  // 댓글 불러오는 함수
+  const getComments = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/articles/comments/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+    .then(res => comments.value = res.data)
   }
   // 회원가입 함수
   const signUp = function (payload) {
@@ -130,5 +142,6 @@ export const useArticleStore = defineStore('article', () => {
     }
 
 
-  return { articles, API_URL, token, isLogin, exchange_rates, getArticles, createArticle, signUp, signIn, logOut, getExchangeRate }
+  return { articles, API_URL, token, isLogin, exchange_rates, comments, 
+    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments,  }
 }, { persist: true })
