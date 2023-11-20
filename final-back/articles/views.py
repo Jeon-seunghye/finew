@@ -34,6 +34,7 @@ def article_list(request):
 
 # 게시글 상세정보
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication, BasicAuthentication])
 def article_detail(request, article_pk):
     article = Article.objects.get(pk=article_pk)
 

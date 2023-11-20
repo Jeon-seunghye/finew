@@ -25,7 +25,10 @@ const router = useRouter();
 onMounted(() => {
   axios({
     method: 'get',
-    url: `${store.API_URL}/articles/${route.params.id}/`
+    url: `${store.API_URL}/articles/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${store.token}`
+    }
   })
     .then((res) => {
       // console.log(res.data)
