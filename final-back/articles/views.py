@@ -4,8 +4,8 @@ from rest_framework.authentication import TokenAuthentication, BasicAuthenticati
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.shortcuts import render
-from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer
-from .models import Article, Comment
+from .serializers import *
+from .models import *
 
 # 인증이 필요한 요소들에게 데코레이터 등록 (401)
 ## @authentication_classes([TokenAuthentication, BasicAuthentication])
@@ -54,6 +54,38 @@ def article_detail(request, article_pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+# 댓글 전체 조회
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def comment_list(request):
+    if request.method == 'GET':
+        comments = Comment.objects.all()
+        serializers = CommentSerializer(comments, many=True)
+        return Response(serializers.data)
+
+
+# 댓글 조회, 수정, 삭제
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+@api_view(['GET', 'PUT', 'DELETE'])
+def comment_detail(request, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    
+    if request.method == 'GET':
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = CommentSerializer(comment, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+    
+    elif request.method == 'DELETE':
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
 # 댓글 생성
 @authentication_classes([TokenAuthentication, BasicAuthentication])
 @permission_classes([IsAuthenticated])
@@ -64,13 +96,3 @@ def comment_create(request, article_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save(article=article)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
-# 댓글 삭제
-@authentication_classes([TokenAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
-@api_view(['DELETE'])
-def comment_delete(request, comment_pk):
-    comment = Comment.objects.get(pk=comment_pk)
-    comment.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)
