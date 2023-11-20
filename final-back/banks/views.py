@@ -112,8 +112,9 @@ def exchange_rate_save_data(request):
         save_data = {
             'cur_unit' : i.get('cur_unit'),   # 통화 코드
             'cur_nm' :  i.get('cur_nm'), # 국가/통화명
-            'ttb' : i.get('ttb'),   # buying rate
-            'tts' : i.get('tts'),   # selling rate
+            'deal_bas_r' : i.get('deal_bas_r'),  # 매매기준율
+            # 'ttb' : i.get('ttb'),   # buying rate
+            # 'tts' : i.get('tts'),   # selling rate
         }
         if ExchangeRate.objects.filter(
                                     cur_unit = i.get('cur_unit'),

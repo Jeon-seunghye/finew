@@ -32,5 +32,6 @@ class SavingOption(models.Model):
 class ExchangeRate(models.Model):
     cur_unit = models.TextField()   # 통화 코드
     cur_nm = models.TextField() # 국가/통화명
-    ttb = models.TextField()   # buying rate
-    tts = models.TextField()   # selling rate
+    deal_bas_r = models.TextField() # 매매기준율
+    # ttb = models.TextField()   # buying rate
+    # tts = models.TextField()   # selling rate
