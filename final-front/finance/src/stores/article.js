@@ -11,6 +11,7 @@ export const useArticleStore = defineStore('article', () => {
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   
+  const users = ref([]) // 전체 회원
   const articles = ref([])  // 전체 게시글
   const comments = ref([])  // 전체 댓글
   const exchange_rates = ref([]) // 전체 환율 정보
@@ -72,6 +73,30 @@ export const useArticleStore = defineStore('article', () => {
       }
     })
     .then(res => comments.value = res.data)
+  }
+
+  // 회원 정보 가져오기
+  const getUsers = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/user/user/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+    .then(res => users.value = res.data)
+  }
+
+  // 회원정보 수정하기
+  const updateUsers = function () {
+    axios({
+      method: 'post',
+      url: `${API_URL}/user/user/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+    .then(res => users.value = res.data)
   }
 
   // 회원가입 함수
@@ -174,6 +199,6 @@ export const useArticleStore = defineStore('article', () => {
     }
 
 
-  return { articles, API_URL, token, isLogin, exchange_rates, comments, deposits, 
-    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit,  }
+  return { articles, API_URL, token, isLogin, exchange_rates, comments, deposits, users,
+    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit, updateUsers,  }
 }, { persist: true })

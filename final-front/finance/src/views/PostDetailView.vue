@@ -1,12 +1,13 @@
 
 <template>
-  <div>
+  <div>    
     <h1 class="post-title">{{ article.title }}</h1>
     <p class="post-content">{{ article.content }}</p>
-    <p>제목 : {{ article.title }}</p>
-    <p>내용 : {{ article.content }}</p>
     <p>작성일 : {{ article.created_at }}</p>
     <p>수정일 : {{ article.updated_at }}</p>
+    <router-link :to="{ name: 'postUpdate', params: { id: article.id } }">
+      <button class="update-button">게시글 수정</button>
+    </router-link>
     <button @click="deleteArticle" class="delete-button">게시글 삭제</button>
   </div>
   <hr>
@@ -72,14 +73,16 @@ const deleteArticle = () => {
       router.push({ name: 'board' })
     })
     .catch((err) => {
+      alert('게시글 삭제가 불가능합니다.');
       console.log(err)
     })
 }
 
-  // 댓글 전부 가져오기
-  onMounted(() => {
-    store.getComments()
-  })
+
+// 댓글 전부 가져오기
+onMounted(() => {
+  store.getComments()
+})
 
 
 // 댓글 생성
@@ -124,6 +127,13 @@ const createComment = function () {
 </script>
 
 <style scoped>
+
+.update-button{
+  margin: 5px;
+}
+.delete-button{
+  margin: 5px;
+}
 .post-title {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 28px;
