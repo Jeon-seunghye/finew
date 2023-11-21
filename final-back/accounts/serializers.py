@@ -1,11 +1,3 @@
-# from rest_framework import serializers
-# from .models import User
-
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = '__all__'
-
 from rest_framework import serializers
 from allauth.account import app_settings as allauth_settings
 from allauth.utils import get_username_max_length
@@ -28,7 +20,8 @@ class CustomRegisterSerializer(RegisterSerializer):
             'username': self.validated_data.get('username',''),
             'password1': self.validated_data.get('password1',''),
             'nickname': self.validated_data.get('nickname',''),
-            'age': self.validated_data.get('age',''),'money': self.validated_data.get('money',''),
+            'age': self.validated_data.get('age',''),
+            'money': self.validated_data.get('money',''),
             'salary': self.validated_data.get('salary',''),
             'email': self.validated_data.get('email',''),
             'financial_products': self.validated_data.get('financial_products',''),
@@ -41,28 +34,16 @@ class CustomRegisterSerializer(RegisterSerializer):
         adapter.save_user(request, user, self)
         self.custom_signup(request, user)
         return user
-
-# class SignUpSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = '__all__'
-
-#     def get_cleaned_data(self):
-#         return {
-#             'username': self.validated_data.get('username',''),
-#             'password1': self.validated_data.get('password1',''),
-#             'email' : self.validate_data.get('email', ''),
-#             'nickname': self.validated_data.get('nickname',''),
-#             'age': self.validated_data.get('age',''),'money': self.validated_data.get('money',''),
-#             'salary': self.validated_data.get('salary',''),
-#             'financial_products': self.validated_data.get('financial_products',''),
-#             }
     
-#     def save(self, request):
-#         adapter = get_adapter()
-#         user = adapter.new_user(request)
-#         self.cleaned_data = self.get_cleaned_data()
-#         adapter.save_user(request, user, self)
-#         # adapter.save_user(request, user, self, commit=False)
-#         self.custom_signup(request, user)
-#         return user
+    def update(self, instance, validated_data):
+        instance.nickname = validated_data.get('nickname', instance.nickname)
+        instance.age = validated_data.get('age', instance.age)
+        instance.money = validated_data.get('money', instance.money)
+        instance.salary = validated_data.get('salary', instance.salary)
+        instance.email = validated_data.get('email', instance.email)
+        instance.financial_product = validated_data.get('financial_product', instance.financial_product)
+        
+        instance.save()
+        return instance
+    
+    

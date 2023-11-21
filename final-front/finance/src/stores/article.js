@@ -5,11 +5,17 @@ import { useRouter } from 'vue-router'
 
 
 export const useArticleStore = defineStore('article', () => {
-  const articles = ref([])
-  const comments = ref([])
+  //////// 변수 ////////
+  const router = useRouter()
+  
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
-  const router = useRouter()
+  
+  const articles = ref([])  // 전체 게시글
+  const comments = ref([])  // 전체 댓글
+  const exchange_rates = ref([]) // 전체 환율 정보
+  
+  // 로그인 유무(T/F)
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -17,6 +23,9 @@ export const useArticleStore = defineStore('article', () => {
       return true
     }
   })
+
+
+  //////// 함수 ////////
   // 게시글 불러오는 함수
   const getArticles = function () {
     axios({
@@ -28,6 +37,7 @@ export const useArticleStore = defineStore('article', () => {
     })
     .then(res => articles.value = res.data)
   }
+
   // 게시글 생성 함수
   const createArticle = function ({title, content}) {
     axios({
@@ -49,6 +59,7 @@ export const useArticleStore = defineStore('article', () => {
       console.log(error)
     })
   }
+
   // 댓글 불러오는 함수
   const getComments = function () {
     axios({
@@ -60,6 +71,7 @@ export const useArticleStore = defineStore('article', () => {
     })
     .then(res => comments.value = res.data)
   }
+
   // 회원가입 함수
   const signUp = function (payload) {
     const {username, password1, password2, email, age, money, salary, nickname} = payload
@@ -87,6 +99,7 @@ export const useArticleStore = defineStore('article', () => {
         console.log(error)
       })
   }
+
   // 로그인 함수
   const signIn = function (payload) {
     const {username, password} = payload
@@ -108,6 +121,7 @@ export const useArticleStore = defineStore('article', () => {
         console.log(error)
       })
   }
+
   // 로그아웃 함수
   const logOut = function () {
     axios({
@@ -122,9 +136,8 @@ export const useArticleStore = defineStore('article', () => {
         console.log(err)
       })
   }
-    // 환율
-    const exchange_rates = ref([]) // 환율 전체 리스트 저장
 
+    // 환율
     const getExchangeRate = function () {
       axios({
         method: 'get',
