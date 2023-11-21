@@ -39,10 +39,8 @@
     store.getDeposit()
   })
 
-  const deposit_bases = store.deposit_bases
-  // const deposit_options = store.deposit_option
-  console.log(deposit_bases)
-  // console.log(deposit_options)
+  const deposits = store.deposits
+  console.log(deposits)
 
 
 
