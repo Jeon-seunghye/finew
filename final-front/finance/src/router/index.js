@@ -12,6 +12,7 @@ import DepositView from '@/views/DepositView.vue'
 import SavingView from '@/views/SavingView.vue'
 import CompareView from '@/views/CompareView.vue'
 import DepositDetailView from '@/views/DepositDetailView.vue'
+import PostUpdateView from '@/views/PostUpdateView.vue'
 
 import { useArticleStore } from '@/stores/article'
 
@@ -68,6 +69,12 @@ const router = createRouter({
       path: '/postdetail/:id',
       name: 'postdetail',
       component: PostDetailView,
+      props: true
+    },
+    {
+      path: '/postdetail/update/:id',
+      name: 'postUpdate',
+      component: PostUpdateView,
       props: true
     },
     {

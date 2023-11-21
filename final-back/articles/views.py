@@ -46,8 +46,9 @@ def article_detail(request, article_pk):
     elif request.method == 'PUT':
         serializer = ArticleSerializer(article, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
+            if article.user == request.user:
+                serializer.save()
+                return Response(serializer.data)
     # 게시글 삭제
     elif request.method == 'DELETE':
         if article.user == request.user:
