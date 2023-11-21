@@ -14,6 +14,9 @@ export const useArticleStore = defineStore('article', () => {
   const articles = ref([])  // 전체 게시글
   const comments = ref([])  // 전체 댓글
   const exchange_rates = ref([]) // 전체 환율 정보
+  const deposit_bases = ref([])  // 전체 예금 base 정보
+  const deposit_options = ref([])  // 전체 예금 option 정보
+
   
   // 로그인 유무(T/F)
   const isLogin = computed(() => {
@@ -26,7 +29,7 @@ export const useArticleStore = defineStore('article', () => {
 
 
   //////// 함수 ////////
-  // 게시글 불러오는 함수
+  // 게시글 정보 가져오기
   const getArticles = function () {
     axios({
       method: 'get',
@@ -60,7 +63,7 @@ export const useArticleStore = defineStore('article', () => {
     })
   }
 
-  // 댓글 불러오는 함수
+  // 댓글 정보 가져오기
   const getComments = function () {
     axios({
       method: 'get',
@@ -137,7 +140,7 @@ export const useArticleStore = defineStore('article', () => {
       })
   }
 
-    // 환율
+    // 환율 정보 가져오기
     const getExchangeRate = function () {
       axios({
         method: 'get',
@@ -154,7 +157,24 @@ export const useArticleStore = defineStore('article', () => {
       })
     }
 
+    // 예금 정보 가져오기 (base, option)
+    const getDeposit = function () {
+      axios({
+        method: 'get',
+        url: `${API_URL}/banks/deposits/`,
+        headers: {
+          Authorization: `Token ${token.value}`
+        }
+      })
+      .then((res) => {
+        deposit_bases.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
 
-  return { articles, API_URL, token, isLogin, exchange_rates, comments, 
-    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments,  }
+
+  return { articles, API_URL, token, isLogin, exchange_rates, comments, deposit_bases, deposit_options, 
+    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit,  }
 }, { persist: true })

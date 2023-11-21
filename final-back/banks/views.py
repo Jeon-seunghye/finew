@@ -129,6 +129,8 @@ def exchange_rate_save_data(request):
 
 # 예금 전체 조회
 @api_view(['GET'])
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def deposit_list(request):
     if request.method == 'GET':
         deposit = DepositListSerializers.objects.all()
@@ -144,6 +146,7 @@ def deposit_detail(request, deposit_pk):
         return Response(serializers.data)
 
 # 적금 전체 조회
+@api_view(['GET'])
 def saving_list(request):
     if request.method == 'GET':
         saving = SavingBase.objects.all()
