@@ -2,22 +2,24 @@
 <template>
   <div id="nav">
     <h1>예금</h1>
-    <div class="menu-nav">
-      <div class="search-form">
-        <input
-          type="text"
-          placeholder="검색어를 입력해주세요"
-          v-model="keyword"  
-          @keyup.enter="searchresultshow(keyword)" 
-        >
-        <button
-          size="sm"
-          class="my-2 my-sm-0"
-          type="submit"
-          @click="searchresultshow(keyword)"
-          >
-          search
-        </button>
+    <div>
+      <h3>검색</h3>
+      <div>
+        <select name="bank_name" id="bank_name">
+          <option value="">
+            
+          </option>
+        </select>
+      </div>
+      <div>
+        <select name="save_term" id="save_term">
+          <option value="">
+
+          </option>
+        </select>
+      </div>
+      <div>
+        <button>검색</button>
       </div>
     </div>
   </div>
