@@ -17,11 +17,10 @@
       <p>저축 기간 : {{ option.save_trm }}개월</p>
       <p>저축 금리 : {{ option.intr_rate }}[%]</p>
       <p>최고 우대금리 : {{ option.intr_rate2 }}[%]</p>
+      <button @click="addCart(`${selectedDeposit.fin_prdt_nm} (${option.save_trm})`)">가입하기</button>
       <hr>
     </div>
-    <div>
-      <button>가입하기</button>
-    </div>
+
   </div>
 </template>
 
@@ -51,6 +50,11 @@
     if (selectedThing) {
       selectedDeposit.value = selectedThing
     }
+  }
+
+  // 가입하기(financial_product 필드에 추가 -> `${selectedDeposit.fin_prdt_nm} (${option.save_trm})`)
+  const addCart = function (product) {
+    
   }
 
 </script>

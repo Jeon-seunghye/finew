@@ -23,9 +23,11 @@
         <button>검색</button>
       </div>
     </div>
-    <hr>
+    <br>
+
     <div>
       <h1>목록</h1>
+      <hr>
       <div v-for="deposit in deposits" :key="deposit.id">
         <p>공시 제출일 : {{ deposit.dcls_month }}</p>
         <p>금융회사명 : {{ deposit.kor_co_nm }}</p>
@@ -59,7 +61,6 @@
     router.push({name: 'depositdetail', params:{fin_prdt_cd:fin_prdt_cd}})
   }
 
-  
 
 
 </script>

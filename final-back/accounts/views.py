@@ -21,3 +21,8 @@ def user_detail(request):
         if serializer.is_valid(raise_exception=True):
             serializer.update(user, serializer.validated_data)
             return Response(serializer.data)
+
+# financial product 생성, 삭제
+@api_view(['PUT', 'DELETE'])
+def financial_product(request):
+    pass
