@@ -133,8 +133,8 @@ def exchange_rate_save_data(request):
 @permission_classes([IsAuthenticated])
 def deposit_list(request):
     if request.method == 'GET':
-        deposit = DepositListSerializers.objects.all()
-        serializers = DepositListSerializers(deposit, many=True)
+        deposit = DepositBase.objects.all()
+        serializers = DepositBaseSerializers(deposit, many=True)
         return Response(serializers.data)
 
 # 예금 상세 조회

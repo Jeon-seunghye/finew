@@ -14,8 +14,7 @@ export const useArticleStore = defineStore('article', () => {
   const articles = ref([])  // 전체 게시글
   const comments = ref([])  // 전체 댓글
   const exchange_rates = ref([]) // 전체 환율 정보
-  const deposit_bases = ref([])  // 전체 예금 base 정보
-  const deposit_options = ref([])  // 전체 예금 option 정보
+  const deposits = ref([])  // 전체 예금 정보
 
   
   // 로그인 유무(T/F)
@@ -167,7 +166,7 @@ export const useArticleStore = defineStore('article', () => {
         }
       })
       .then((res) => {
-        deposit_bases.value = res.data
+        deposits.value = res.data
       })
       .catch((err) => {
         console.log(err)
@@ -175,6 +174,6 @@ export const useArticleStore = defineStore('article', () => {
     }
 
 
-  return { articles, API_URL, token, isLogin, exchange_rates, comments, deposit_bases, deposit_options, 
+  return { articles, API_URL, token, isLogin, exchange_rates, comments, deposits, 
     getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit,  }
 }, { persist: true })
