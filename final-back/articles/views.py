@@ -50,8 +50,11 @@ def article_detail(request, article_pk):
             return Response(serializer.data)
     # 게시글 삭제
     elif request.method == 'DELETE':
-        article.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if article.user == request.user:
+            article.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 # 댓글 전체 조회

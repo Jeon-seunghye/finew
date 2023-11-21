@@ -31,6 +31,10 @@ def deposit_save_data(request):
             'fin_co_no': i.get('fin_co_no'),  # 금융회사코드
             'fin_prdt_nm': i.get('fin_prdt_nm'),    # 금융상품명
             'fin_prdt_cd': i.get('fin_prdt_cd'),    # 금융상품코드
+            'join_member': i.get('join_member'),    # 가입 대상
+            'join_way': i.get('join_way'),   # 가입 방법
+            'spcl_cnd': i.get('spcl_cnd'),   # 우대 조건
+            'etc_note': i.get('etc_note'),   # 기타 유의사항
             }
         if DepositBase.objects.filter(fin_prdt_cd = i.get('fin_prdt_cd')).exists():
             continue
@@ -75,6 +79,10 @@ def saving_save_data(request):
             'fin_co_no': i.get('fin_co_no'),  # 금융회사코드
             'fin_prdt_nm': i.get('fin_prdt_nm'),    # 금융상품명
             'fin_prdt_cd': i.get('fin_prdt_cd'),    # 금융상품코드
+            'join_member': i.get('join_member'),    # 가입 대상
+            'join_way': i.get('join_way'),   # 가입 방법
+            'spcl_cnd': i.get('spcl_cnd'),   # 우대 조건
+            'etc_note': i.get('etc_note'),   # 기타 유의사항
         }
         if SavingBase.objects.filter(fin_prdt_cd = i.get('fin_prdt_cd')).exists():
             continue

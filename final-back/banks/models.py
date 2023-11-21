@@ -7,6 +7,11 @@ class DepositBase(models.Model):
     fin_co_no = models.TextField()  # 금융회사코드
     fin_prdt_nm = models.TextField()    # 금융상품명
     fin_prdt_cd = models.TextField()    # 금융상품코드
+    
+    join_member = models.TextField()    # 가입 대상
+    join_way = models.TextField()   # 가입 방법
+    spcl_cnd = models.TextField()   # 우대 조건
+    etc_note = models.TextField()   # 기타 유의사항
 
 class DepositOption(models.Model):
     depositbase = models.ForeignKey(DepositBase, on_delete=models.CASCADE)
@@ -21,6 +26,10 @@ class SavingBase(models.Model):
     fin_co_no = models.TextField()  # 금융회사코드
     fin_prdt_nm = models.TextField()    # 금융상품명
     fin_prdt_cd = models.TextField()    # 금융상품코드
+    join_member = models.TextField()    # 가입 대상
+    join_way = models.TextField()   # 가입 방법
+    spcl_cnd = models.TextField()   # 우대 조건
+    etc_note = models.TextField()   # 기타 유의사항
 
 class SavingOption(models.Model):
     savingbase = models.ForeignKey(SavingBase, on_delete=models.CASCADE)

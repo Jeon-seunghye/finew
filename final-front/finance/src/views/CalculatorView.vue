@@ -68,7 +68,6 @@
   // 선택한 것의 deal_bas_rate 갖고오는 함수1
   const getDealBasRate1 = function () {
     const selectedCurrency = exchange_rates.find(rate => `${rate.cur_unit} : ${rate.cur_nm}` === selectedTemp1.value);
-    console.log(selectedCurrency)
     if (selectedCurrency) {
       if (selectedCurrency.cur_unit.includes('(100)')) {
         selected_deal_bas_rate_1.value = parseFloat(selectedCurrency.deal_bas_r.replace(/,/g, '')) / 100
@@ -98,7 +97,6 @@
   // 선택한 것의 deal_bas_rate 갖고오는 함수2
   const getDealBasRate2 = function () {
     const selectedCurrency = exchange_rates.find(rate => `${rate.cur_unit} : ${rate.cur_nm}` === selectedTemp2.value);
-    console.log(selectedCurrency)
     if (selectedCurrency) {
       if (selectedCurrency.cur_unit.includes('(100)')) {
         selected_deal_bas_rate_2.value = parseFloat(selectedCurrency.deal_bas_r.replace(/,/g, '')) / 100
