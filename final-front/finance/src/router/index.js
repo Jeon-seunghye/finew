@@ -11,6 +11,7 @@ import MapView from '@/views/MapView.vue'
 import DepositView from '@/views/DepositView.vue'
 import SavingView from '@/views/SavingView.vue'
 import CompareView from '@/views/CompareView.vue'
+import DepositDetailView from '@/views/DepositDetailView.vue'
 
 import { useArticleStore } from '@/stores/article'
 
@@ -88,6 +89,12 @@ const router = createRouter({
       path: '/deposit',
       name: 'deposit',
       component: DepositView
+    },
+    {
+      path: '/deposit/:fin_prdt_cd',
+      name: 'depositdetail',
+      component: DepositDetailView,
+      props: true
     },
     {
       path: '/saving',

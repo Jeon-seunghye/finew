@@ -17,6 +17,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
             model = get_user_model()
             fields = ('username',)
     user = UserNameSerializer(read_only=True)
+    
 
     class Meta:
         model = Article
