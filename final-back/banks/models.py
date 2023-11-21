@@ -11,8 +11,8 @@ class DepositBase(models.Model):
 class DepositOption(models.Model):
     depositbase = models.ForeignKey(DepositBase, on_delete=models.CASCADE)
     save_trm = models.IntegerField()    # 저축기간(month)
-    intr_rate = models.FloatField() # 금리
-    intr_rate2 = models.FloatField() # 우대금리
+    intr_rate = models.FloatField(null=True) # 금리
+    intr_rate2 = models.FloatField(null=True) # 우대금리
 
 
 class SavingBase(models.Model):
