@@ -5,22 +5,23 @@
     <div>
       <h3>검색</h3>
       <div>
-        <select name="bank_name" id="bank_name">
-          <option v-for="saving in savings" :key="saving.id">
-            {{ saving.kor_co_nm }}
+        <select v-model="selectedBank" name="bank_name" id="bank_name">
+          <option v-for="bankName in setBankNames" :key="bankName">
+            {{ bankName }}
           </option>
         </select>
       </div>
       <div>
-        <button>검색</button>
+        <button @click="search">검색</button>
       </div>
     </div>
+
     <br>
 
     <div>
       <h1>목록</h1>
       <hr>
-      <div v-for="saving in savings" :key="saving.id">
+      <div v-for="saving in filteredSavings" :key="saving.id">
         <p>공시 제출일 : {{ saving.dcls_month }}</p>
         <p>금융회사명 : {{ saving.kor_co_nm }}</p>
         <p>상품명 : {{ saving.fin_prdt_nm }}</p>
@@ -36,7 +37,7 @@
 
 <script setup>
   import { useArticleStore } from '@/stores/article.js'
-  import { onMounted } from 'vue';
+  import { onMounted, ref, computed } from 'vue';
   import { useRouter } from 'vue-router';
   const store = useArticleStore()
   const router = useRouter()
@@ -46,9 +47,31 @@
     store.getSaving()
   })
 
-  const savings = store.savings
 
-  // 상세보기 페이지로 가즈아
+  // 은행명 중복 제거
+  const setBankNames = computed(() => {
+  const bankNameSet = new Set()
+  store.savings.forEach(saving => bankNameSet.add(saving.kor_co_nm))
+  return Array.from(bankNameSet)
+  })
+
+
+  // 검색에 사용되는 변수
+  const selectedBank = ref('') // 선택된 은행명을 저장할 변수
+  const filteredSavings = ref([])  // 필터링된 예금을 저장할 배열
+  // 검색하는 함수
+  const search = function () {
+    // 선택된 은행명에 맞는 예금상품만 필터링
+    if (selectedBank.value !== '') {
+      filteredSavings.value = store.savings.filter(saving => saving.kor_co_nm === selectedBank.value)
+    } else {
+      // 선택된 은행명이 없으면 모든 예금상품을 보여줌 (근데 그래도 검색 버튼은 눌러야 함.)
+      filteredSavings.value = store.savings
+    }
+  }
+
+
+  // 상세보기 페이지로 이동하는 함수
   const goDetail = function (fin_prdt_cd) {
     router.push({name: 'savingdetail', params:{fin_prdt_cd:fin_prdt_cd}})
   }
