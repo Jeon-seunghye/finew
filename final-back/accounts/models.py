@@ -1,5 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from banks.models import *
+
+
+
+
 
 
 class User(AbstractUser):
@@ -10,7 +16,8 @@ class User(AbstractUser):
     age = models.IntegerField(null=True) # 나이
     money = models.IntegerField(null=True)   # 재산(잔고)
     salary = models.IntegerField(null=True)  # 연봉
-    financial_product = models.TextField(null=True)  # 가입 상품
+    deposit_options = models.ManyToManyField(DepositOption, through='FinancialProduct', related_name='users', blank=True)
+    saving_options = models.ManyToManyField(SavingOption, through='FinancialProduct', related_name='users', blank=True)
 
     # superuser fields
     is_active = models.BooleanField(default=True)
@@ -33,7 +40,9 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         age = data.get("age")
         money = data.get("money")
         salary = data.get("salary")
-        financial_product = data.get("financial_products")
+        deposit_options = data.get("deposit_options")
+        saving_options = data.get("saving_options")
+
 
         user_email(user, email)
         user_username(user, username)
@@ -49,12 +58,12 @@ class CustomAccountAdapter(DefaultAccountAdapter):
             user.money = money
         if salary:
             user.salary = salary
-        if financial_product:
-            financial_products = user.financial_products.split(',')
-            financial_products.append(financial_product)
-            if len(financial_products) > 1:
-                financial_products = ','.join(financial_products)
-            user_field(user,"financial_products", financial_products)
+        # if financial_product:
+        #     financial_products = user.financial_products.split(',')
+        #     financial_products.append(financial_product)
+        #     if len(financial_products) > 1:
+        #         financial_products = ','.join(financial_products)
+        #     user_field(user,"financial_products", financial_products)
         if "password1" in data:
             user.set_password(data["password1"])
         else:
@@ -63,3 +72,10 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         if commit:
             user.save()
         return user
+    
+
+
+class FinancialProduct(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    deposits = models.ForeignKey(DepositOption, on_delete = models.CASCADE, null=True)
+    savings = models.ForeignKey(SavingOption, on_delete = models.CASCADE, null=True)
