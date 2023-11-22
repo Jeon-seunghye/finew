@@ -31,6 +31,57 @@ export const useArticleStore = defineStore('article', () => {
 
 
   //////// 함수 ////////
+  // 예금 데이터 받기
+  const getDepositData = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/banks/deposit_save_data/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  // 적금 데이터 받기
+  const getSavingData = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/banks/saving_save_data/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+  
+  // 환율 데이터 받기
+  const getExchangeRateData = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/banks/exchange_rate_save_data/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+
   // 게시글 정보 가져오기
   const getArticles = function () {
     axios({
@@ -144,6 +195,9 @@ export const useArticleStore = defineStore('article', () => {
         console.log(response.data)
         console.log(response.data.key)
         token.value = response.data.key
+        getDepositData()
+        getSavingData()
+        getExchangeRateData()
         router.push({name: 'home'})
       })
       .catch((error) => {
