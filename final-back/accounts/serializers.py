@@ -2,9 +2,9 @@ from rest_framework import serializers
 from allauth.account import app_settings as allauth_settings
 from allauth.utils import get_username_max_length
 from allauth.account.adapter import get_adapter
-from .models import User
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from django.contrib.auth import get_user_model
+from .models import *
 
 
 
@@ -51,4 +51,10 @@ class CustomRegisterSerializer(RegisterSerializer):
 class CustomUserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
+        fields = '__all__'
+
+
+class FinancialProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FinancialProduct
         fields = '__all__'

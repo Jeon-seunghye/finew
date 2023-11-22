@@ -19,8 +19,8 @@
       <p>최고 우대금리 : {{ option.intr_rate2 }}[%]</p>
       <button v-if="!isAdd" @click="addCart(option.id)">가입하기</button>
       <button v-else @click="addCart(option.id)">가입취소</button>
-
       <hr>
+
     </div>
 
   </div>
