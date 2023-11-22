@@ -243,8 +243,8 @@ export const useArticleStore = defineStore('article', () => {
         }
       })
         .then((res) => {
+          getFinancialProducts()
           console.log(res)
-          store.getFinancialProducts()
         })
         .catch((error) => {
           console.log(error)
