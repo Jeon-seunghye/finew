@@ -52,6 +52,10 @@
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">추천목록</a></li>
                     <li><a class="dropdown-item" href="/profile">개인정보수정</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
                   </ul>
                 </li>
               </ul>
