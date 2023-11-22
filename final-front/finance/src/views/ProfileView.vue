@@ -35,7 +35,7 @@
           </tbody>
         </table>
         <div class="form-row center">
-          <button class="buttons" type="submit">저장</button>
+          <button type="submit">변경하기</button>
         </div>
       </form>
     </div>
@@ -116,11 +116,6 @@
     margin-top: 100px;
     
   }
-  .buttons{
-    border: 1px solid lightgray;
-    background-color: whitesmoke;
-    border-radius: 10%;
-  }
 
   .edit {
     border-collapse: collapse;
@@ -138,7 +133,7 @@
     font-size: xx-large;
     font-weight: 900;
     text-align: center;
-    background-image: url('@/assets/bg.jpg');
+    background-image: url('@/assets/compare.jpg');
     background-size: cover;
     height: 150px;
     display: flex;

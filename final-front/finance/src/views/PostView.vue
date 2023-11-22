@@ -1,10 +1,8 @@
 
 <template>
   <div>
-    <h1 class="board-title">자 유 게 시 판</h1>
-    <div class="container">
-      <button @click="router.push({ name: 'create' })" class="create-button">글쓰기</button>
-    </div>
+    <h1 class="board-title">Board</h1>
+    <button @click="router.push({ name: 'create' })" class="create-button">새 글 쓰기</button>
     <ArticleList />
   </div>
 </template>
@@ -19,13 +17,11 @@ const router = useRouter()
 .board-title {
   font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
   font-size: 28px;
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
   color: #3498db; /* 파란색 */
-  font-weight: bold;
 }
-
 
 .create-button {
   font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
@@ -36,14 +32,8 @@ const router = useRouter()
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  float: right;
-  margin-right: 20px;
-  margin-bottom: 10px;
-  opacity: 70%;
-  height: 26px;
-  font-size: small;
-  display: flex;
-  align-items: center;
+  display: block; /* 버튼을 블록 레벨로 표시하여 가로 중앙 정렬 */
+  margin: 0 auto; /* 가로 중앙 정렬 */
 }
 
 .create-button:hover {
