@@ -66,6 +66,7 @@
       .catch((err) => {
         console.error(err);
       });
+    store.getFinancialProducts()
   });
 
   const updateUser = () => {
@@ -94,7 +95,6 @@
         alert('프로필 수정이 불가능합니다.');
         router.push({ name: 'profile' });
       });
-    store.getFinancialProducts()
   };
 
 </script>
