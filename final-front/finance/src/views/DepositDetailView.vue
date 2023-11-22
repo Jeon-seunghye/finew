@@ -38,7 +38,6 @@
   const route = useRoute()
   
   const fin_prdt_cd = ref(route.params.fin_prdt_cd)
-  // const deposits = store.deposits
 
   // 예금 정보 가져오기
   onMounted(() => {
@@ -47,24 +46,16 @@
     store.getFinancialProducts()
   })
   
-  
-  // 이제 상품코드랑 같은 정보 갖고오기
-  const selectedDeposit = ref({})
-  const getSelectedDeposit = function () {
-    const selectedThing = store.deposits.find(data => data.fin_prdt_cd === fin_prdt_cd.value)
-    if (selectedThing) { 
-      selectedDeposit.value = selectedThing
+  // 예금 가입 유무 확인
+  const isAdded = function (optionId) {
+    for (let index = 0; index < store.financial_products.length; index++) {
+      if (optionId === store.financial_products[index].deposits) {
+        return true
+      } else {
+        return false
+      }
     }
   }
-  
-  // 가입한 예금 상품 배열
-  const depositsArray = computed(() => {
-    return store.financial_products.deposits || []
-  })
-
-  // 상품 가입 상태 확인 함수
-  const isAdded = computed(() => (optionId) => depositsArray.value.includes(optionId));
-
   
 </script>
 
