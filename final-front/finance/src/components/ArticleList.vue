@@ -1,14 +1,15 @@
 <template>
   <div class="container cmargin">
     <ul>
-      <table class="table">
-        <thead class="tablehead table-primary">
+      <table class="table table-hover">
+        <thead class="table-primary">
           <tr>
             <th scope="col">#</th>
             <th scope="col">제목</th>
             <th scope="col">작성자</th>
             <th scope="col">작성 날짜</th>
             <th scope="col">상세 보기</th>
+            <th scope="col">댓글 수</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -19,8 +20,10 @@
             <td>{{ formatDate(article.created_at) }}</td>
             <td>
               <router-link :to="{ name: 'postdetail', params: { id: article.id } }">
-                <button class="view-detail-button">상세 보기</button>
+                <button class="view-detail-button">확인하기</button>
               </router-link>
+            </td>
+            <td>
               <router-link :to="{ name: 'postdetail', params: { id: article.id } }">
                 <img class="imgTag" src="src/assets/comments.png" >
               </router-link>
@@ -54,6 +57,9 @@ const formatDate = (date) => {
 
 <style scoped>
 
+thead{
+  opacity: 80%;
+}
 .cmargin{
   margin-top: 10px;
 }
@@ -79,7 +85,5 @@ const formatDate = (date) => {
 .view-detail-button:hover {
   background-color: #2980b9; /* 더 어두운 파란색 */
 }
-.table tbody tr:hover {
-  background-color: #3498db; /* Light gray background on hover */
-}
+
 </style>
