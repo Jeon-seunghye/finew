@@ -15,32 +15,17 @@ class DepositBaseSerializers(serializers.ModelSerializer):
         model = DepositBase
         fields = '__all__'
 
+
 class SavingOptionSerializers(serializers.ModelSerializer):
     class Meta:
         model = SavingOption
         fields = '__all__'
 
 class SavingBaseSerializers(serializers.ModelSerializer):
-    savingbaseoption_set = SavingOptionSerializers(many=True, read_only=True)
+    savingoption_set = SavingOptionSerializers(many=True, read_only=True)
     class Meta:
         model = SavingBase
         fields = '__all__'
-
-
-
-
-# 
-class DepositListSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = DepositBase
-        fields = '__all__'
-
-# 
-class SavingListSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = SavingBase
-        fields = '__all__'
-        
 
 
 

@@ -1,18 +1,25 @@
 import { createRouter, createWebHistory, useRouter } from 'vue-router'
+
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
-import CalculatorView from '@/views/CalculatorView.vue'
-import PostView from '@/views/PostView.vue'
-import PostDetailView from '@/views/PostDetailView.vue'
-import PostCreateView from '@/views/PostCreateView.vue'
 import ProfileView from '@/views/ProfileView.vue'
-import MapView from '@/views/MapView.vue'
-import DepositView from '@/views/DepositView.vue'
-import SavingView from '@/views/SavingView.vue'
-import CompareView from '@/views/CompareView.vue'
-import DepositDetailView from '@/views/DepositDetailView.vue'
+
+import PostView from '@/views/PostView.vue'
+import PostCreateView from '@/views/PostCreateView.vue'
+import PostDetailView from '@/views/PostDetailView.vue'
 import PostUpdateView from '@/views/PostUpdateView.vue'
+
+import CompareView from '@/views/CompareView.vue'
+import DepositView from '@/views/DepositView.vue'
+import DepositDetailView from '@/views/DepositDetailView.vue'
+import SavingView from '@/views/SavingView.vue'
+import SavingDetailView from '@/views/SavingDetailView.vue'
+
+import CalculatorView from '@/views/CalculatorView.vue'
+import MapView from '@/views/MapView.vue'
+
+
 
 import { useArticleStore } from '@/stores/article'
 
@@ -107,6 +114,12 @@ const router = createRouter({
       path: '/saving',
       name: 'saving',
       component: SavingView
+    },
+    {
+      path: '/saving/:fin_prdt_cd',
+      name: 'savingdetail',
+      component: SavingDetailView,
+      props: true
     },
     
   ]
