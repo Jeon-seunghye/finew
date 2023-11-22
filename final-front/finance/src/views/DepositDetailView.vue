@@ -38,7 +38,7 @@
   const route = useRoute()
   
   const fin_prdt_cd = ref(route.params.fin_prdt_cd)
-  const deposits = store.deposits
+  // const deposits = store.deposits
 
   // 예금 정보 가져오기
   onMounted(() => {
@@ -51,7 +51,7 @@
   // 이제 상품코드랑 같은 정보 갖고오기
   const selectedDeposit = ref({})
   const getSelectedDeposit = function () {
-    const selectedThing = deposits.find(data => data.fin_prdt_cd === fin_prdt_cd.value)
+    const selectedThing = store.deposits.find(data => data.fin_prdt_cd === fin_prdt_cd.value)
     if (selectedThing) { 
       selectedDeposit.value = selectedThing
     }
