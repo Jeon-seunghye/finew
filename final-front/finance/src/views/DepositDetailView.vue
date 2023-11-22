@@ -17,7 +17,7 @@
       <p>저축 기간 : {{ option.save_trm }}개월</p>
       <p>저축 금리 : {{ option.intr_rate }}[%]</p>
       <p>최고 우대금리 : {{ option.intr_rate2 }}[%]</p>
-      <button @click="store.addCart(option.id)">
+      <button @click="store.addDepositCart(option.id)">
         {{ isAdded(option.id) ? '가입취소' : '가입하기' }}
       </button>
       <hr>
