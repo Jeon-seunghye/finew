@@ -29,7 +29,7 @@
             </tr>
             <tr>
               <td colspan="2">
-                <p>가입한 상품: {{ user.financial_product }}</p>
+                <p>가입한 상품: {{ store.financial_products }}</p>
               </td>
             </tr>
           </tbody>
@@ -96,8 +96,13 @@
         alert('프로필 수정이 불가능합니다.');
         router.push({ name: 'profile' });
       });
+    store.getFinancialProducts()
   };
+
+  console.log(store.financial_products)
 </script>
+
+
 
 <style scoped>
 
