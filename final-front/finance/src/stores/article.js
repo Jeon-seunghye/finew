@@ -233,8 +233,8 @@ export const useArticleStore = defineStore('article', () => {
       })
     }
 
-    // 상품 가입/취소
-    const addCart = function (optionId) {
+    // 예금상품 가입/취소
+    const addDepositCart = function (optionId) {
       axios({
         method: 'get',
         url: `${API_URL}/user/financial_product/deposit/${optionId}/`,
@@ -251,6 +251,23 @@ export const useArticleStore = defineStore('article', () => {
         })
     }
 
+    // 적금상품 가입/취소
+    const addSavingCart = function (optionId) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/user/financial_product/saving/${optionId}/`,
+        headers: {
+          Authorization: `Token ${token.value}`
+        }
+      })
+        .then((res) => {
+          getFinancialProducts()
+          console.log(res)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }  
   return { articles, API_URL, token, isLogin, exchange_rates, comments, deposits, users, savings, financial_products, 
-    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit, updateUsers, getSaving, getUsers, getFinancialProducts, addCart,  }
+    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit, updateUsers, getSaving, getUsers, getFinancialProducts, addDepositCart, addSavingCart,   }
 }, { persist: true })
