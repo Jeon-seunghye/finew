@@ -1,14 +1,24 @@
 
 <template>
-  <div>    
+  <div>
+    <a class="icon-link icon-link-hover boardlist" style="--bs-link-hover-color-rgb: 25, 135, 84;" href="/board">
+      ← 게시글 목록
+      <svg class="bi" aria-hidden="true"></svg>
+    </a>
     <h1 class="post-title">{{ article.title }}</h1>
-    <p class="post-content">{{ article.content }}</p>
-    <p>작성일 : {{ article.created_at }}</p>
-    <p>수정일 : {{ article.updated_at }}</p>
-    <router-link :to="{ name: 'postUpdate', params: { id: article.id } }">
-      <button class="update-button">게시글 수정</button>
-    </router-link>
-    <button @click="deleteArticle" class="delete-button">게시글 삭제</button>
+    <div class="contents">
+      <p class="post-content">내용 <br><br>{{ article.content }}</p>
+      <div class="date">
+        <p>작성일 : {{ formatDate(article.created_at) }}</p>
+        <p>수정일 : {{ formatDate(article.updated_at) }}</p>
+      </div>
+    </div>
+    <div class="buttons">
+        <router-link :to="{ name: 'postUpdate', params: { id: article.id } }">
+          <button class="update-button">게시글 수정</button>
+        </router-link>
+      <button @click="deleteArticle" class="delete-button">게시글 삭제</button>
+    </div>
   </div>
   <hr>
   <div>
@@ -60,6 +70,7 @@ onMounted(() => {
     })
 })
 
+
 const deleteArticle = () => {
   axios({
     method: 'delete',
@@ -84,6 +95,16 @@ onMounted(() => {
   store.getComments()
 })
 
+const formatDate = (date) => {
+  const formattedDate = new Date(date);
+  const year = formattedDate.getFullYear();
+  const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = formattedDate.getDate().toString().padStart(2, '0');
+  const hours = formattedDate.getHours().toString().padStart(2, '0');
+  const minutes = formattedDate.getMinutes().toString().padStart(2, '0');
+  
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+};
 
 // 댓글 생성
 const createComment = function () {
@@ -127,12 +148,25 @@ const createComment = function () {
 </script>
 
 <style scoped>
-
+.boardlist{
+  margin-top: 20px;
+  margin-left: 20px;
+}
 .update-button{
   margin: 5px;
+  border: 1px solid lightgray;
+  border-radius: 10%;
+  opacity: 70%;
+  color: gray;
+  font-size: 15px;
 }
 .delete-button{
   margin: 5px;
+  border: 1px solid lightgray;
+  border-radius: 10%;
+  opacity: 70%;
+  color: gray;
+  font-size: 15px;
 }
 .post-title {
   font-family: 'Noto Sans KR', sans-serif;
@@ -142,11 +176,23 @@ const createComment = function () {
   text-align: center;
   color: #3498db;
 }
-
+.contents{
+  margin-left: 40px;
+  text-align: left;
+}
 .post-content {
-  font-size: 18px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 20px;
   color: #2c3e50;
   margin-top: 10px;
+}
+.date{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+}
+.buttons{
+  text-align: right;
+  margin-right: 40px;
 }
 </style>
 

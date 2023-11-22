@@ -1,96 +1,167 @@
 <template>
   <main>
-    <h1>프로필</h1>
-    <!-- 사용자 정보 출력 -->
-    <p>이름: {{ user.username }}</p>
-    <p>나이: {{ user.age }}</p>
-    <p>이메일: {{ user.email }}</p>
-    <p>닉네임: {{ user.nickname }}</p>
-    <p>연봉: {{ user.salary }}</p>
-    <p>자산: {{ user.money }}</p>
-    <p>가입한 상품: {{ user.financial_product }}</p>
-    <!-- 기타 필요한 사용자 정보를 출력 -->
-
-    <!-- 프로필 수정 버튼 -->
-    <button @click="toggleProfileForm" class="delete-button">프로필 수정</button>
-
-    <!-- 프로필 수정 폼 -->
-    <form v-if="isProfileFormVisible" @submit.prevent="submitProfileForm" class="edit">
-      <label for="newNick">새로운 닉네임:</label>
-      <input id="newNick" v-model="newNick" />
-      <label for="newAge">새로운 나이:</label>
-      <input id="newAge" type="number" v-model="newAge" />
-      <label for="newEmail">새로운 이메일:</label>
-      <input id="newEmail" v-model="newEmail" />
-      <label for="newSalary">새로운 연봉:</label>
-      <input id="newSalary" v-model="newSalary" />
-      <label for="newMoney">새로운 자산:</label>
-      <input id="newMoney" v-model="newMoney" />
-
-      <button type="submit">저장</button>
-    </form>
+    <div class="title">
+      <p>회 원 정 보 수 정</p>
+    </div>
+    <div class="profile-container">
+      <form @submit.prevent="updateUser" class="edit">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><label for="newNick">닉네임</label></td>
+              <td><input v-model.trim="user.nickname" id="newNick" /></td>
+            </tr>
+            <tr>
+              <td><label for="newAge">나이</label></td>
+              <td><input v-model.trim="user.age" id="newAge" /></td>
+            </tr>
+            <tr>
+              <td><label for="newEmail">이메일</label></td>
+              <td><input v-model.trim="user.email" id="newEmail" /></td>
+            </tr>
+            <tr>
+              <td><label for="newSalary">연봉</label></td>
+              <td><input v-model.trim="user.salary" id="newSalary" /></td>
+            </tr>
+            <tr>
+              <td><label for="newMoney">자산</label></td>
+              <td><input v-model.trim="user.money" id="newMoney" /></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <p>가입한 상품: {{ user.financial_product }}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="form-row center">
+          <button type="submit">변경하기</button>
+        </div>
+      </form>
+    </div>
   </main>
 </template>
 
 <script setup>
-  import { ref , onMounted} from 'vue';
+  import { ref, onMounted } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
+  import axios from 'axios';
   import { useArticleStore } from '@/stores/article';
 
+  const router = useRouter();
+  const route = useRoute();
   const store = useArticleStore();
-  const isProfileFormVisible = ref(false);
-  const newNick = ref('');
-  const newAge = ref('');
-  const newEmail = ref('')
-  const newSalary = ref('')
-  const newMoney = ref('')
+  const user = ref({ nickname: '', age: '' , email: '' , salary: '' , money: ''});
 
+  console.log(route.params)
 
-  onMounted(()=> {
-    store.getUsers()
-  })
-
-  const user = store.users
-
-  // 프로필 수정 버튼 클릭 시 폼 토글
-  const toggleProfileForm = () => {
-    isProfileFormVisible.value = !isProfileFormVisible.value;
-  };
-
-  // 프로필 수정 폼 제출 시 호출되는 함수
-  const submitProfileForm = () => {
-    // 간단한 유효성 검사
-    if (newNick === '' || newAge === '' || newEmail === '' || newSalary === '' || newMoney === '') {
-      alert('새로운 사용자 이름과 나이를 입력하세요.');
-      return;
-    }
-  
-  // 서버에 사용자 정보 업데이트 요청
-  store.updateUsers({
-    nickname: newNick,
-    age: newAge,
-    email: newEmail,
-    money : newMoney,
-    salary : newSalary,
+  onMounted(() => {
+    axios
+      .get(`${store.API_URL}/user/user/`, {
+        headers: {
+          Authorization: `Token ${store.token}`,
+        },
+      })
+      .then((res) => {
+        user.value = res.data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   });
 
-  // 폼 초기화
-  newNick.value = '';
-  newAge.value = '';
-  newEmail.value = '';
-  newMoney.value = '';
-  newSalary.value = '';
-  // 폼 숨기기
-  isProfileFormVisible.value = false;
-};
+  const updateUser = () => {
+    axios
+      .put(
+        `${store.API_URL}/user/user/`,
+        {
+          nickname: user.value.nickname,
+          age: user.value.age,
+          email: user.value.email,
+          salary: user.value.salary,
+          money: user.value.money,
+        },
+        {
+          headers: {
+            Authorization: `Token ${store.token}`,
+          },
+        }
+      )
+      .then(() => {
+        alert('프로필이 업데이트 되었습니다.');
+        router.push({ name: 'profile' });
+      })
+      .catch((err) => {
+        console.log(err)
+        alert('프로필 수정이 불가능합니다.');
+        router.push({ name: 'profile' });
+      });
+  };
 </script>
 
 <style scoped>
 
-.edit{
-  display: flex;
-  flex-direction: column;
-  width: 30%;
+  .table{
+    margin-left: 20px;
+    border-top: 1px solid lightgray;
+  }
+  form{
+    text-align: center;
+  }
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+    
+  }
 
-}
+  .edit {
+    border-collapse: collapse;
+    width: 80%;
+  }
 
+  .edit td {
+    padding: 10px;
+  }
+
+  .center {
+    text-align: center;
+  }
+  .title{
+    font-size: xx-large;
+    font-weight: 900;
+    text-align: center;
+    background-image: url('@/assets/compare.jpg');
+    background-size: cover;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+  }
+  table th,
+  table td {
+    border-left: 1px lightgray solid;
+    border-right: 1px lightgray solid;
+  }
+  table th:first-child,
+  table td:first-child {
+    border-left: 0;
+  }
+  table th:last-child,
+  table td:last-child {
+    border-right: 0;
+  }
+  input {
+    width: 400px;
+    display: flex;
+    justify-content: left;
+    opacity: 70%;
+  }
+  label {
+    width: 100px;
+  }
 </style>
