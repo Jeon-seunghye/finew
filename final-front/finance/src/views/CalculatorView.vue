@@ -1,29 +1,40 @@
 <template>
-  <div>
-    <h1>환율 계산기</h1>
+  <div class="container">
+    <h1 class="headers">환율 계산기</h1>
+    <div class="wraping">
+      <div class="cover">
+        <div class="selecting">
+          <div class="lefting">
+            <label for="selectTemp1">기존 화폐</label>
+          </div>
+          <div class="input-select-wrapper">
+            <input type="number" placeholder="입력" v-model="inputTemp" @input="calculateExchange">
+            <select id="selectTemp1" v-model="selectedTemp1" @change="setSelectedTemp1(selectedTemp1)">
+              <option v-for="exchange_rate1 in exchange_rates" :key="exchange_rate1.id">
+                {{ exchange_rate1.cur_unit }} : {{ exchange_rate1.cur_nm }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
 
-    <div style="text-align: center;">
-      <label for="selectTemp1">기존 : </label>
-      <select id="selectTemp1" v-model="selectedTemp1" @change="setSelectedTemp1(selectedTemp1)">
-        <option v-for="exchange_rate1 in exchange_rates" :key="exchange_rate1.id">
-          {{ exchange_rate1.cur_unit }} : {{ exchange_rate1.cur_nm }}
-        </option>
-      </select>
-    </div>
-
-    <div style="text-align: center;">
-      <label for="selectTemp2">변경 : </label>
-      <select id="selectTemp2" v-model="selectedTemp2" @change="setSelectedTemp2(selectedTemp2)">
-        <option v-for="exchange_rate2 in exchange_rates" :key="exchange_rate2.id">
-          {{ exchange_rate2.cur_unit }} : {{ exchange_rate2.cur_nm }}
-        </option>
-      </select>
+      <div class="cover">
+        <div class="selecting">
+          <div class="lefting">
+            <label for="selectTemp2">환전할 화폐</label>
+          </div>
+          <div class="input-select-wrapper">
+            <p class="result">{{ result.toFixed(2) }}</p>
+            <select id="selectTemp2" v-model="selectedTemp2" @change="setSelectedTemp2(selectedTemp2)">
+              <option v-for="exchange_rate2 in exchange_rates" :key="exchange_rate2.id">
+                {{ exchange_rate2.cur_unit }} : {{ exchange_rate2.cur_nm }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
     
-    <div style="text-align: center;">
-      <input type="number" placeholder="입력" v-model="inputTemp" @input="calculateExchange">
-      <h1>{{ result.toFixed(2) }}</h1>
-    </div>
   </div>
 </template>
 
@@ -119,10 +130,75 @@
 </script>
 
 
-
-
-
-
-
 <style scoped>
+
+.wraping{
+  background-color: whitesmoke;
+  padding: 10px;
+  border-radius: 10px;
+}
+.headers{
+  color: #255580;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.container{
+  font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
+  margin-top: 20px;
+}
+
+.cover{
+  margin-block: 10px;
+  margin: 20px;
+  text-align: center;
+}
+.selecting{
+  margin-bottom: 20px;
+}
+
+.lefting{
+  display: flex;
+}
+
+.input-select-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 30px;
+  height: 40px;
+  background-color: white;
+
+}
+
+.input-select-wrapper input {
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px;
+}
+
+.input-select-wrapper p {
+  margin-right: 10px;
+  margin-left: 10px;
+  text-align: left;
+  padding: 5px;
+  width: 150px;
+  border: 1px;
+}
+
+.input-select-wrapper select {
+  padding: 5px;
+  width: 228px;
+  border: 1px;
+}
+
+.result {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 18px;
+}
 </style>

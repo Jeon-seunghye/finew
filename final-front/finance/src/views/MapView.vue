@@ -1,19 +1,29 @@
 <template>
-  <div>
-    <div>
-      <select v-model="selectedProvince" @change="updateCityOptions">
-        <option v-for="province in provinces" :value = "province" :key="province">{{ province }}</option>
-      </select>
-      <br>
-      <!-- <div>{{  cities[selectedProvince] }}</div> -->
-      <select v-model="selectedCity" @change="moveToCity">
-          <option value="0">시/군/구</option>
-        <option v-for="city in cities[selectedProvince]" :value = "city" :key="city">{{ city }}</option>
-      </select>
-    </div>
-    <div id="map"></div>
-    <div class="button-group">
-      <button @click="searchBanks">은행 찾기</button>
+  <div class="container">
+    <h1 class="headers">은행 찾기</h1>
+    <hr>
+    <div class="wrapping">
+      <div class="selecting">
+        <p>선택</p>
+        <div class="selectloc">
+          <select v-model="selectedProvince" @change="updateCityOptions">
+            <option v-for="province in provinces" :value = "province" :key="province">{{ province }}</option>
+          </select>
+        </div>
+        <!-- <div>{{  cities[selectedProvince] }}</div> -->
+        <div class="selectloc">
+          <select v-model="selectedCity" @change="moveToCity">
+              <option value="0">시/군/구</option>
+            <option v-for="city in cities[selectedProvince]" :value = "city" :key="city">{{ city }}</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button @click="searchBanks">검색</button>
+        </div>
+      </div>
+      <div class="containermap">
+        <div id="map" class="map"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -138,16 +148,59 @@ function moveToCity() {
 </script>
 
 <style scoped>
-#map {
-  width: 400px;
+
+.wrapping{
+  display: flex;
+}
+.headers{
+  color: #255580;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.container{
+  font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
+  margin-top: 20px;
+  margin: 0 auto;
+}
+.containermap{
+  margin-left: 30px;
+  margin-top: 10px;
+  width: 100%;
   height: 400px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+.selecting{
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.selecting select{
+  width: 100px;
+}
+.selectloc{
+  margin-bottom: 20px;
+}
+.map {
+  margin-top: 10px;
+  width: 100%;
+  height: 400px;
+  border-radius: 15px;
+  margin-bottom: 20px;
 }
 
-.button-group {
-  margin: 10px 0px;
+.button-group{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  text-align: center;
+  width: 100px;
 }
 
 button {
   margin: 0 3px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  width: 100px;
 }
 </style>
