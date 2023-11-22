@@ -71,8 +71,6 @@ const formatDate = (date) => {
   border-radius: 5px;
   opacity: 40%;
   cursor: pointer;
-  font-size: small;
-  padding-block: 2px;
   transition: background-color 0.3s;
 }
 
