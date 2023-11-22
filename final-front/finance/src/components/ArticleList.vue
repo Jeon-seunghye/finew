@@ -5,16 +5,18 @@
         <thead class="tablehead table-primary">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">작성자</th>
             <th scope="col">제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">작성 날짜</th>
             <th scope="col">상세 보기</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
           <tr v-for="(article, index) in store.articles" :key="article.pk">
             <td scope="row">{{ index + 1 }}</td>
-            <td>{{ article.user.username }}</td>
             <td>{{ article.title }}</td>
+            <td>{{ article.user.username }}</td>
+            <td>{{ formatDate(article.created_at) }}</td>
             <td>
               <router-link :to="{ name: 'postdetail', params: { id: article.id } }">
                 <button class="view-detail-button">상세 보기</button>
@@ -39,6 +41,14 @@ const store = useArticleStore()
 onMounted(() => {
   store.getArticles()
 })
+
+const formatDate = (date) => {
+  const formattedDate = new Date(date);
+  const year = formattedDate.getFullYear();
+  const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because months are zero-based
+  const day = formattedDate.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 </script>
 
@@ -66,5 +76,8 @@ onMounted(() => {
 
 .view-detail-button:hover {
   background-color: #2980b9; /* 더 어두운 파란색 */
+}
+.table tbody tr:hover {
+  background-color: #3498db; /* Light gray background on hover */
 }
 </style>
