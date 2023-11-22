@@ -17,11 +17,12 @@
       <p>저축 기간 : {{ option.save_trm }}개월</p>
       <p>저축 금리 : {{ option.intr_rate }}[%]</p>
       <p>최고 우대금리 : {{ option.intr_rate2 }}[%]</p>
-      <button @click="addCart(option.id)">{{ isAdded(option.id) ? '가입취소' : '가입하기' }}</button>
 
+      <button @click="store.addCart(option.id)">
+        {{ isAdded(option.id) ? '가입취소' : '가입하기' }}
+      </button>
       <hr>
     </div>
-
   </div>
 </template>
 
@@ -32,14 +33,12 @@
   import { useRoute, useRouter } from 'vue-router';
   import { useArticleStore } from '@/stores/article.js'
   import { ref, onMounted, computed } from 'vue';
+
   const store = useArticleStore()
   const route = useRoute()
   
-  const token = store.token
   const fin_prdt_cd = ref(route.params.fin_prdt_cd)
   const deposits = store.deposits
-  const financial_products = store.financial_products
-  console.log(financial_products)
 
   // 예금 정보 가져오기
   onMounted(() => {
@@ -53,38 +52,19 @@
   const selectedDeposit = ref({})
   const getSelectedDeposit = function () {
     const selectedThing = deposits.find(data => data.fin_prdt_cd === fin_prdt_cd.value)
-    if (selectedThing) {
+    if (selectedThing) { 
       selectedDeposit.value = selectedThing
     }
   }
   
   // 가입한 예금 상품 배열
   const depositsArray = computed(() => {
-    return financial_products.deposits || []
+    return store.financial_products.deposits || []
   })
+
   // 상품 가입 상태 확인 함수
-  const isAdded = (optionId) => depositsArray.value.includes(optionId)
+  const isAdded = computed(() => (optionId) => depositsArray.value.includes(optionId));
 
-  // 상품 가입/취소
-  const addCart = function (optionId) {
-    axios({
-      method: 'get',
-      url: `${store.API_URL}/user/financial_product/deposit/${optionId}/`,
-      headers: {
-        Authorization: `Token ${token}`
-      }
-    })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-  
-
-  // console.log(depositsArray)
-  // console.log(isAdded(financial_products[0].deposits))
   
 </script>
 
