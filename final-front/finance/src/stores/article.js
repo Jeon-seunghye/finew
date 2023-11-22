@@ -17,6 +17,7 @@ export const useArticleStore = defineStore('article', () => {
   const deposits = ref([])  // 전체 예금 정보
   const savings = ref([])  // 전체 적금 정보
   const exchange_rates = ref([]) // 전체 환율 정보
+  const financial_products = ref([])  // 상품 가입 목록 정보
 
   
   // 로그인 유무(T/F)
@@ -215,7 +216,23 @@ export const useArticleStore = defineStore('article', () => {
       })
     }
 
+    // 상품 가입 목록 정보 가져오기
+    const getFinancialProducts = function () {
+      axios({
+        method: 'get',
+        url: `${API_URL}/user/financial_product/`,
+        headers: {
+          Authorization: `Token ${token.value}`
+        }
+      })
+      .then((res) => {
+        financial_products.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
 
-  return { articles, API_URL, token, isLogin, exchange_rates, comments, deposits, users, savings, 
-    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit, updateUsers, getSaving, getUsers }
+  return { articles, API_URL, token, isLogin, exchange_rates, comments, deposits, users, savings, financial_products, 
+    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit, updateUsers, getSaving, getUsers, getFinancialProducts }
 }, { persist: true })

@@ -17,8 +17,7 @@
       <p>저축 기간 : {{ option.save_trm }}개월</p>
       <p>저축 금리 : {{ option.intr_rate }}[%]</p>
       <p>최고 우대금리 : {{ option.intr_rate2 }}[%]</p>
-      <button v-if="!isAdd" @click="addCart(option.id)">가입하기</button>
-      <button v-else @click="addCart(option.id)">가입취소</button>
+      <button @click="addCart(option.id)">{{ isAdded(option.id) ? '가입취소' : '가입하기' }}</button>
 
       <hr>
     </div>
@@ -35,16 +34,20 @@
   import { ref, onMounted, computed } from 'vue';
   const store = useArticleStore()
   const route = useRoute()
-
+  
+  const token = store.token
   const fin_prdt_cd = ref(route.params.fin_prdt_cd)
+  const deposits = store.deposits
+  const financial_products = store.financial_products
+  console.log(financial_products)
 
   // 예금 정보 가져오기
   onMounted(() => {
     store.getDeposit()
     getSelectedDeposit()
+    store.getFinancialProducts()
   })
   
-  const deposits = store.deposits
   
   // 이제 상품코드랑 같은 정보 갖고오기
   const selectedDeposit = ref({})
@@ -54,11 +57,13 @@
       selectedDeposit.value = selectedThing
     }
   }
-
-  const token = store.token
   
-  // 상품 가입/취소 버튼 변경 만들자 !
-  const isAdd = ref(false)
+  // 가입한 예금 상품 배열
+  const depositsArray = computed(() => {
+    return financial_products.deposits || []
+  })
+  // 상품 가입 상태 확인 함수
+  const isAdded = (optionId) => depositsArray.value.includes(optionId)
 
   // 상품 가입/취소
   const addCart = function (optionId) {
@@ -69,20 +74,18 @@
         Authorization: `Token ${token}`
       }
     })
-    .then((res) => {
-      if (isAdd.value === false) {
-        isAdd.value = true
-      } else {
-        isAdd.value = false
-      }
-      console.log(res)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
+  
 
-
+  // console.log(depositsArray)
+  // console.log(isAdded(financial_products[0].deposits))
+  
 </script>
 
 
