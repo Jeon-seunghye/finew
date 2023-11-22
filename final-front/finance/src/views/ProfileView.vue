@@ -53,8 +53,6 @@
   const store = useArticleStore();
   const user = ref({ nickname: '', age: '' , email: '' , salary: '' , money: ''});
 
-  console.log(route.params)
-
   onMounted(() => {
     axios
       .get(`${store.API_URL}/user/user/`, {
@@ -99,7 +97,6 @@
     store.getFinancialProducts()
   };
 
-  console.log(store.financial_products)
 </script>
 
 
