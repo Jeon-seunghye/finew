@@ -3,5 +3,7 @@ from . import views
 
 urlpatterns = [
     path('user/', views.user_detail),  # 유저 상세 조회, 수정
-    path('financial_product/', views.financial_product) # 금융상품 가입, 가입취소
+    path('financial_product/<int:deposit_id>/', views.financial_products_deposit), # 예금 상품 가입
+    path('financial_product/<int:saving_id>/', views.financial_products_saving), # 적금 상품 가입
+
 ]
