@@ -15,7 +15,7 @@
         <button @click="search">검색</button>
       </div>
     </div>
-    
+
     <br>
 
     <div>
@@ -45,7 +45,6 @@
   onMounted(() => {
     store.getDeposit()
   })
-
 
 
   // 은행명 중복 제거
