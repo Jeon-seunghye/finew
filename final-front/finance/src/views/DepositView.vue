@@ -12,14 +12,6 @@
         </select>
       </div>
       <div>
-        <select name="save_term" id="save_term">
-          <option>6</option>
-          <option>12</option>
-          <option>24</option>
-          <option>36</option>
-        </select>
-      </div>
-      <div>
         <button>검색</button>
       </div>
     </div>

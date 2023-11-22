@@ -158,7 +158,7 @@ def deposit_detail(request, deposit_pk):
 def saving_list(request):
     if request.method == 'GET':
         saving = SavingBase.objects.all()
-        serializers = SavingListSerializers(saving, many=True)
+        serializers = SavingBaseSerializers(saving, many=True)
         return Response(serializers.data)
     
 # 적금 상세 조회

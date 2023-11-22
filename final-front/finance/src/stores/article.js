@@ -5,17 +5,18 @@ import { useRouter } from 'vue-router'
 
 
 export const useArticleStore = defineStore('article', () => {
-  //////// 변수 ////////
   const router = useRouter()
   
+  //////// 변수 ////////
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   
   const users = ref([]) // 전체 회원
   const articles = ref([])  // 전체 게시글
   const comments = ref([])  // 전체 댓글
-  const exchange_rates = ref([]) // 전체 환율 정보
   const deposits = ref([])  // 전체 예금 정보
+  const savings = ref([])  // 전체 적금 정보
+  const exchange_rates = ref([]) // 전체 환율 정보
 
   
   // 로그인 유무(T/F)
@@ -197,8 +198,24 @@ export const useArticleStore = defineStore('article', () => {
         console.log(err)
       })
     }
+    // 적금 정보 가져오기 (base, option)
+    const getSaving = function () {
+      axios({
+        method: 'get',
+        url: `${API_URL}/banks/savings/`,
+        headers: {
+          Authorization: `Token ${token.value}`
+        }
+      })
+      .then((res) => {
+        savings.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
 
 
-  return { articles, API_URL, token, isLogin, exchange_rates, comments, deposits, users,
-    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit, updateUsers,  }
+  return { articles, API_URL, token, isLogin, exchange_rates, comments, deposits, users, savings, 
+    getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit, updateUsers, getSaving, getUsers }
 }, { persist: true })

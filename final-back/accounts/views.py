@@ -36,8 +36,15 @@ def financial_products_deposit(request, deposit_id):
         request.user.deposit_options.add(product)
         return Response({'message':'add okay'})
 
-
-
 # 적금 상품 가입
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def financial_products_saving(request, saving_id):
-    pass
+    product = SavingOption.objects.get(pk=saving_id)
+    if product in request.user.saving_options.all():
+        request.user.saving_options.remove(product)
+        return Response({'message':'remove okay'})
+    else:
+        request.user.saving_options.add(product)
+        return Response({'message':'add okay'})

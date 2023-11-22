@@ -64,7 +64,7 @@
   const addCart = function (optionId) {
     axios({
       method: 'get',
-      url: `${store.API_URL}/user/financial_product/${optionId}/`,
+      url: `${store.API_URL}/user/financial_product/deposit/${optionId}/`,
       headers: {
         Authorization: `Token ${token}`
       }
@@ -82,14 +82,6 @@
     })
   }
 
-
-  // const isLogin = computed(() => {
-  //   if (token.value === null) {
-  //     return false
-  //   } else {
-  //     return true
-  //   }
-  // })
 
 </script>
 
