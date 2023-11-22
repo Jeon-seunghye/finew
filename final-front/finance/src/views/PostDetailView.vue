@@ -7,8 +7,10 @@
     </a>
     <h1 class="post-title">{{ article.title }}</h1>
     <div class="contents">
-      <p class="post-content">내용 <br><br>{{ article.content }}</p>
+      <h5 >내용</h5><br>
+      <p class="post-content">{{ article.content }}</p>
       <div class="date">
+        <br>
         <p>작성일 : {{ formatDate(article.created_at) }}</p>
         <p>수정일 : {{ formatDate(article.updated_at) }}</p>
       </div>
@@ -21,18 +23,19 @@
     </div>
   </div>
   <hr>
-  <div>
-    <h3>댓글</h3>
+  <div class="contents">
+    <h3>댓글 &nbsp;{{ article.comment_count }}</h3>
     <form @submit.prevent="createComment">
-      <label for="">댓글 내용 :</label>
-      <input type="text" v-model.trim="content" />
-      <input type="submit" value="댓글작성" />
+      <label for="">내용 &nbsp;</label>
+      <input class="commenting" type="text" v-model.trim="content" />
+      <input class="creating" type="submit" value="댓글작성" />
     </form>
-
-    <div v-for="comment in article.comment_set">
-      <p>{{ comment.content }}</p>
-      <input type="submit" value="삭제" @click="deleteComment(comment.id)" />
-
+    <br>
+    <div v-for="(comment, index) in article.comment_set" :key="comment.id">
+      <span><b>No. {{ index + 1 }} &nbsp;|</b></span> 
+      <span style="margin-left: 15px;">{{ comment.content }}</span>
+      <input class="deletebtn" type="submit" value="삭제" @click="deleteComment(comment.id)" />
+      <hr style="margin-right: 40px;">
     </div>
 
   </div>
@@ -170,21 +173,23 @@ const createComment = function () {
 }
 .post-title {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 28px;
+  font-size: 35px;
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
   color: #3498db;
 }
 .contents{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
   margin-left: 40px;
   text-align: left;
 }
 .post-content {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 20px;
+  font-size: 30px;
   color: #2c3e50;
-  margin-top: 10px;
+  margin-top: 5px;;
 }
 .date{
   font-family: 'Noto Sans KR', sans-serif;
@@ -193,6 +198,31 @@ const createComment = function () {
 .buttons{
   text-align: right;
   margin-right: 40px;
+}
+.commenting{
+  width: 400px;
+}
+.creating{
+  margin-left: 30px;
+  opacity: 70%;
+  background-color: lightslategray;
+  border-color: lightslategray;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+}
+.deleting{
+  display: flex;
+}
+
+.deletebtn{
+  margin-left: 30px;
+  opacity: 60%;
+  background-color: #6bb4e4;
+  border-color: #6bb4e4;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
 }
 </style>
 
