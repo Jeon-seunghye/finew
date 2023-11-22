@@ -48,3 +48,14 @@ def financial_products_saving(request, saving_id):
     else:
         request.user.saving_options.add(product)
         return Response({'message':'add okay'})
+
+
+# 유저별 상품가입목록 가져오기
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def financial_product_list(request):
+    products = FinancialProduct.objects.filter(user_id=request.user.pk)
+    if request.method == 'GET':
+        serializer = FinancialProductSerializer(products, many=True)
+        return Response(serializer.data)
