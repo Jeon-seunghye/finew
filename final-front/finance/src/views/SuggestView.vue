@@ -18,6 +18,12 @@
 
   console.log(store.users)
   console.log(store.users.nickname)
+
+  console.log(store.users.kor_co_nm)
+  console.log(store.users.join_way)
+  console.log(store.users.intr_rate_type_nm)
+
+
 </script>
 
 
