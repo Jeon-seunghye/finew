@@ -1,12 +1,16 @@
 
 <template>
   <div>
-    <h1 class="board-title">자 유 게 시 판</h1>
+    <div class="title">
+      <p>자 유 게 시 판</p>
+    </div>
     <div class="container">
       <button @click="router.push({ name: 'create' })" class="create-button">글쓰기</button>
     </div>
     <ArticleList />
   </div>
+  <p class="mb-0 bg-light text-center py-2 fixed-bottom" style="width: 100%; font-size: small;" >&copy; 2023 Finew All Rights Reserved. 본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</p>
+
 </template>
 
 <script setup>
@@ -16,61 +20,41 @@ const router = useRouter()
 </script>
 
 <style scoped>
-.board-title {
-  font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
-  font-size: 28px;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #3498db; /* 파란색 */
-  font-weight: bold;
-}
+  .create-button {
+    font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
+    padding: 12px;
+    background-color: #2980b9; /* 짙은 파란색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    opacity: 70%;
+    height: 26px;
+    font-size: small;
+    display: flex;
+    align-items: center;
+  }
 
-
-.create-button {
-  font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
-  padding: 12px;
-  background-color: #2980b9; /* 짙은 파란색 */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  float: right;
-  margin-right: 20px;
-  margin-bottom: 10px;
-  opacity: 70%;
-  height: 26px;
-  font-size: small;
-  display: flex;
-  align-items: center;
-}
-
-.create-button:hover {
-  background-color: #1f618d; /* 더 어두운 파란색 */
-}
-
-/* 게시글 목록 스타일링 */
-.article-list {
-  list-style: none;
-  padding: 0;
-}
-
-.article-item {
-  background-color: #ecf0f1; /* 연한 회색 */
-  border: 1px solid #bdc3c7; /* 연한 은색 */
-  border-radius: 5px;
-  margin-bottom: 10px;
-  padding: 15px;
-}
-
-.article-title {
-  font-size: 18px;
-  color: #2c3e50; /* 어두운 회색 */
-}
-
-.article-content {
-  margin-top: 10px;
-  color: #34495e; /* 더 어두운 회색 */
-}
+  .create-button:hover {
+    background-color: #1f618d; /* 더 어두운 파란색 */
+  }
+  .title{
+    font-size: xx-large;
+    font-weight: 900;
+    text-align: center;
+    background-image: url('@/assets/bgmap.jpg');
+    background-size: cover;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    /* text-shadow: -1px 0 #1f618d, 0 1px #1f618d, 1px 0 #1f618d, 0 -1px #1f618d; */
+    margin-bottom: 20px;
+  }
 </style>
