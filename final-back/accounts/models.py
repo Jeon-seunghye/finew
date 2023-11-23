@@ -13,9 +13,9 @@ class User(AbstractUser):
     username = models.CharField(max_length=30, unique=True)
     nickname = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(max_length=254, blank=True, null=True)
-    age = models.IntegerField(null=True) # 나이
-    money = models.IntegerField(null=True)   # 재산(잔고)
-    salary = models.IntegerField(null=True)  # 연봉
+    age = models.IntegerField(null=True, blank=True) # 나이
+    money = models.IntegerField(null=True, blank=True)   # 재산(잔고)
+    salary = models.IntegerField(null=True, blank=True)  # 연봉
     deposit_options = models.ManyToManyField(DepositOption, through='FinancialProduct', related_name='users', blank=True)
     saving_options = models.ManyToManyField(SavingOption, through='FinancialProduct', related_name='users', blank=True)
 
