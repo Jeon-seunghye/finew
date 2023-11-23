@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>추천목록</h1>
+    <div class="container">
+        <h1 class="headers">추천목록</h1>
         
         <div v-for="i in selectedProducts.length" :key="i">
           {{ selectedProducts[i-1] }}
@@ -57,7 +57,7 @@
              
   });
 
-  console.log(selectedProducts.value)
+  // console.log(selectedProducts.value)
   
   // // 콘솔 확인
   //   console.log(store.users)
@@ -83,5 +83,14 @@
 
 
 <style scoped>
-
+.headers{
+  color: #255580;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.container{
+  font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
+  margin-top: 20px;
+}
 </style>
