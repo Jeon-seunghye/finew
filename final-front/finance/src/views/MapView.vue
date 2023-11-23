@@ -25,8 +25,10 @@
       </div>
     </div>
     <div class="results">
+      <div>
+        <p style="font-weight: bold; font-size: larger;">검색 결과 {{ searchedBanks.length }}개</p>
+      </div>
       <div v-if="searchedBanks" class="search-results">
-        <h3>검색 결과</h3>
         <ul>
           <li v-for="bank in searchedBanks" :key="bank.name">{{ bank.name }}</li>
         </ul>

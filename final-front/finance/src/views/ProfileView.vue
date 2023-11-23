@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="title">
-      <p>회 원 정 보 수 정</p>
+      <p>회 원 정 보</p>
     </div>
     <div class="profile-container">
       <form @submit.prevent="updateUser" class="edit">

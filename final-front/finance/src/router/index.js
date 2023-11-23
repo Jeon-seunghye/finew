@@ -18,6 +18,8 @@ import SavingDetailView from '@/views/SavingDetailView.vue'
 
 import CalculatorView from '@/views/CalculatorView.vue'
 import MapView from '@/views/MapView.vue'
+import SuggestView from '@/views/SuggestView.vue'
+
 
 
 
@@ -88,6 +90,11 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: ProfileView
+    },
+    {
+      path: '/suggest',
+      name: 'suggest',
+      component: SuggestView
     },
     {
       path: '/map',

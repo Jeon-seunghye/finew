@@ -50,8 +50,8 @@
                       회원정보
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">추천목록</a></li>
-                      <li><a class="dropdown-item" href="/profile">개인정보수정</a></li>
+                      <li><a class="dropdown-item" href="/suggest">추천목록</a></li>
+                      <li><a class="dropdown-item" href="/profile">개인정보</a></li>
                     </ul>
                   </li>
                 </ul>
