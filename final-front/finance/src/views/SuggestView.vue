@@ -35,7 +35,6 @@
       for (let i = 0; i < store.deposits.length; i++) {        
         for (let j = 0; j < store.deposits[i].depositoption_set.length; j++) {
           if (
-
             store.deposits[i].join_way.includes(store.users.value.join_way) &&
             store.deposits[i].kor_co_nm === store.users.value.kor_co_nm &&
             store.deposits[i].depositoption_set[j].intr_rate_type_nm === store.users.value.intr_rate_type_nm
