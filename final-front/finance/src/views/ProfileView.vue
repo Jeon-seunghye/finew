@@ -29,15 +29,36 @@
             </tr>
             <tr>
               <td colspan="2">
-                <!-- 수정하는 -->
-                <div v-for="product in store.financial_products">
-                  <button @click="wogns(product)">실행</button>
-                  <!-- <p>상품 옵션의 id : {{ product.deposits }}</p> 
-                  <p>상품 옵션의 id : {{ store.deposits[0].depositoption_set[0].id }}</p>
-                  <p>은행명 : {{ store.deposits[0].kor_co_nm }}</p>
-                  <p>상품명 : {{ store.deposits[0].fin_prdt_nm }}</p>        -->
-                  <p>{{ myKorCoName }}</p>
-                  <p>{{ myFinPrdtName }}</p>
+                <div class="lists">
+                  <div v-for="product in store.financial_products">
+                    <div v-if="product.deposits">
+                      <p>예금</p>
+                      <div v-for="i in store.deposits.length" :key="i">
+                        <div v-for="j in store.deposits[i-1].depositoption_set.length" :key="j">
+                          <div v-if="store.deposits[i-1].depositoption_set[j-1].id === product.deposits">
+                            <p>은행명 : {{ store.deposits[i-1].kor_co_nm }}</p>
+                            <p>상품명 : {{ store.deposits[i-1].fin_prdt_nm }}</p>
+                            <p>가입기간 : {{ store.deposits[i-1].depositoption_set[j-1].save_trm }}</p>
+                            <hr>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div v-else>
+                      <p>적금</p>
+                      <div v-for="i in store.savings.length" :key="i">
+                        <div v-for="j in store.savings[i-1].savingoption_set.length" :key="j">
+                          <div v-if="store.savings[i-1].savingoption_set[j-1].id === product.savings">
+                            <p>은행명 : {{ store.savings[i-1].kor_co_nm }}</p>
+                            <p>상품명 : {{ store.savings[i-1].fin_prdt_nm }}</p>
+                            <p>가입기간 : {{ store.savings[i-1].savingoption_set[j-1].save_trm }}</p>
+                            <hr>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -47,22 +68,21 @@
           <button class="buttons" type="submit">저장</button>
         </div>
       </form>
-
-      <hr>
-
     </div>
   </main>
+  <p class="mb-0 bg-light text-center py-2 " style="width: 100%; font-size: small;" >&copy; 2023 Finew All Rights Reserved. 본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</p>
+
 </template>
 
 <script setup>
-  import { ref, onMounted, computed } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import axios from 'axios';
   import { useArticleStore } from '@/stores/article';
-  const router = useRouter();
-  const store = useArticleStore();
-  const route = useRoute();
 
+  const router = useRouter();
+  const route = useRoute();
+  const store = useArticleStore();
   const user = ref({ nickname: '', age: '' , email: '' , salary: '' , money: ''});
 
   onMounted(() => {
@@ -81,7 +101,6 @@
     store.getFinancialProducts()
   });
 
-  // 회원정보수정
   const updateUser = () => {
     axios
       .put(
@@ -110,42 +129,16 @@
       });
   };
 
-
-  // 가입 상품 가져오기
-  const myKorCoName = ref('')
-  const myFinPrdtName = ref('')
-  
-  const wogns = function (product) {
-    for (const deposit of store.deposits) {
-      for (const option of deposit.depositoption_set) {
-        if (product.deposits === option.id) {
-          myKorCoName.value = deposit.kor_co_nm
-          myFinPrdtName.value = deposit.fin_prdt_nm
-          return; // 일치하는 것을 찾았으면 반복문을 종료합니다.
-        }
-      }
-    }
-  }
-
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 <style scoped>
 
+.lists{
+  display: flex;
+  flex-direction: column;
+}
   .table{
     margin-left: 20px;
     border-top: 1px solid lightgray;

@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1 class="headers">환율 계산기</h1>
+    <hr>
     <div class="wraping">
       <div class="cover">
         <div class="selecting">
@@ -8,7 +9,7 @@
             <label for="selectTemp1">기존 화폐</label>
           </div>
           <div class="input-select-wrapper">
-            <input type="number" placeholder="입력" v-model="inputTemp" @input="calculateExchange" style="width: 64%;">
+            <input type="number" placeholder="입력" v-model="inputTemp" style="width:64%;" @input="calculateExchange">
             <select id="selectTemp1" v-model="selectedTemp1" @change="setSelectedTemp1(selectedTemp1)">
               <option v-for="exchange_rate1 in exchange_rates" :key="exchange_rate1.id">
                 {{ exchange_rate1.cur_unit }} : {{ exchange_rate1.cur_nm }}
@@ -36,6 +37,8 @@
     </div>
     
   </div>
+  <p class="mb-0 bg-light text-center py-2 fixed-bottom" style="width: 100%; font-size: small;" >&copy; 2023 Finew All Rights Reserved. 본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</p>
+
 </template>
 
 
@@ -133,6 +136,7 @@
 <style scoped>
 
 .wraping{
+  margin-top: 20px;
   background-color: whitesmoke;
   padding: 10px;
   border-radius: 10px;
@@ -141,7 +145,7 @@
   color: #255580;
   font-weight: bold;
   margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .container{
   font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
