@@ -79,3 +79,10 @@ class FinancialProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     deposits = models.ForeignKey(DepositOption, on_delete = models.CASCADE, null=True)
     savings = models.ForeignKey(SavingOption, on_delete = models.CASCADE, null=True)
+
+
+class MyPreference(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+    kor_co_nm = models.TextField()
+    join_way = models.TextField()
+    intr_rate_type_nm = models.TextField()

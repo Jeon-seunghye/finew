@@ -45,6 +45,7 @@
   // 적금 정보 가져오기
   onMounted(() => {
     store.getSaving()
+    search()
   })
 
 

@@ -29,7 +29,16 @@
             </tr>
             <tr>
               <td colspan="2">
-                <p>가입한 상품: {{ store.financial_products }}</p>
+                <!-- 수정하는 -->
+                <div v-for="product in store.financial_products">
+                  <button @click="wogns(product)">실행</button>
+                  <!-- <p>상품 옵션의 id : {{ product.deposits }}</p> 
+                  <p>상품 옵션의 id : {{ store.deposits[0].depositoption_set[0].id }}</p>
+                  <p>은행명 : {{ store.deposits[0].kor_co_nm }}</p>
+                  <p>상품명 : {{ store.deposits[0].fin_prdt_nm }}</p>        -->
+                  <p>{{ myKorCoName }}</p>
+                  <p>{{ myFinPrdtName }}</p>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -38,19 +47,22 @@
           <button class="buttons" type="submit">저장</button>
         </div>
       </form>
+
+      <hr>
+
     </div>
   </main>
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, computed } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import axios from 'axios';
   import { useArticleStore } from '@/stores/article';
-
   const router = useRouter();
-  const route = useRoute();
   const store = useArticleStore();
+  const route = useRoute();
+
   const user = ref({ nickname: '', age: '' , email: '' , salary: '' , money: ''});
 
   onMounted(() => {
@@ -69,6 +81,7 @@
     store.getFinancialProducts()
   });
 
+  // 회원정보수정
   const updateUser = () => {
     axios
       .put(
@@ -97,7 +110,37 @@
       });
   };
 
+
+  // 가입 상품 가져오기
+  const myKorCoName = ref('')
+  const myFinPrdtName = ref('')
+  
+  const wogns = function (product) {
+    for (const deposit of store.deposits) {
+      for (const option of deposit.depositoption_set) {
+        if (product.deposits === option.id) {
+          myKorCoName.value = deposit.kor_co_nm
+          myFinPrdtName.value = deposit.fin_prdt_nm
+          return; // 일치하는 것을 찾았으면 반복문을 종료합니다.
+        }
+      }
+    }
+  }
+
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

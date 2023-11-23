@@ -47,12 +47,14 @@ def deposit_save_data(request):
         save_data = {
                 'depositbase': DepositBase.objects.get(fin_prdt_cd = j.get('fin_prdt_cd')).id,
                 'save_trm': j.get('save_trm'),   # 저축기간(month)
+                'intr_rate_type_nm': j.get('intr_rate_type_nm'),   # 저축 금리 유형
                 'intr_rate': j.get('intr_rate'), # 금리
                 'intr_rate2': j.get('intr_rate2') # 우대금리
         }
         if DepositOption.objects.filter(
                                         depositbase = DepositBase.objects.get(fin_prdt_cd = j.get('fin_prdt_cd')).id,
                                         save_trm = j.get('save_trm'),
+                                        intr_rate_type_nm = j.get('intr_rate_type_nm'),
                                         intr_rate = j.get('intr_rate'),
                                         intr_rate2 = j.get('intr_rate2')
                                         ).exists():
@@ -94,12 +96,14 @@ def saving_save_data(request):
         save_data = {
             'savingbase': SavingBase.objects.get(fin_prdt_cd = j.get('fin_prdt_cd')).id,
             'save_trm': j.get('save_trm'),   # 저축기간(month)
+            'intr_rate_type_nm': j.get('intr_rate_type_nm'),   # 저축 금리 유형
             'intr_rate': j.get('intr_rate'), # 금리
             'intr_rate2': j.get('intr_rate2') # 우대금리
         }
         if SavingOption.objects.filter(
                                     savingbase = SavingBase.objects.get(fin_prdt_cd = j.get('fin_prdt_cd')).id,
                                     save_trm = j.get('save_trm'),
+                                    intr_rate_type_nm = j.get('intr_rate_type_nm'),
                                     intr_rate = j.get('intr_rate'),
                                     intr_rate2 = j.get('intr_rate2')
                                     ).exists():
