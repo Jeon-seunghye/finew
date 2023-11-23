@@ -19,17 +19,17 @@
                 <li class="nav-item">
                   <a href="/" class="nav-link">Home</a>
                 </li>
-                <div v-if="store.isLogin">
-                  <li class="nav-item">
-                    <a href="/" @click.prevent="store.logOut" class="nav-link">로그아웃</a>
-                  </li>
-                </div>
-                <div v-else>
+                <div v-if="!store.isLogin">
                   <li class="nav-item">
                     <a href="/signup" class="nav-link" v-if="!store.isLogin">회원가입</a>
                   </li>
                   <li class="nav-item">
                     <a href="/login" class="nav-link" v-if="!store.isLogin">로그인</a>
+                  </li>
+                </div>
+                <div v-else>
+                  <li class="nav-item">
+                    <a href="/" @click.prevent="store.logOut" class="nav-link">로그아웃</a>
                   </li>
                 </div>
                 <li class="nav-item">
