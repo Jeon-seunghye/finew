@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <h1>비교</h1>
+  <main class="container">
+    <h1 class="headers">비교</h1>
     <nav>
       <div class="box">
         <RouterLink to="/deposit" class="nav-link">예금</RouterLink> 
@@ -27,5 +27,16 @@ nav{
 
 .box{
   padding-left: 20px;
+}
+
+.headers{
+  color: #255580;
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.container{
+  font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
+  margin-top: 20px;
 }
 </style>
