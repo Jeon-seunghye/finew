@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 
 @api_view(['GET', 'PUT'])
+@authentication_classes([TokenAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def user_detail(request):
     user = User.objects.get(pk=request.user.pk)
     # 유저 정보 조회
