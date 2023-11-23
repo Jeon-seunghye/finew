@@ -75,56 +75,44 @@
                 </select>
               </td>
             </tr>
-
-
-
-
-
-
-
-
-
-
-
-            <tr>
-              <td colspan="2">
-                <div class="lists">
-                  <div v-for="product in store.financial_products">
-                    <div v-if="product.deposits">
-                      <p>예금</p>
-                      <div v-for="i in store.deposits.length" :key="i">
-                        <div v-for="j in store.deposits[i-1].depositoption_set.length" :key="j">
-                          <div v-if="store.deposits[i-1].depositoption_set[j-1].id === product.deposits">
-                            <p>은행명 : {{ store.deposits[i-1].kor_co_nm }}</p>
-                            <p>상품명 : {{ store.deposits[i-1].fin_prdt_nm }}</p>
-                            <p>가입기간 : {{ store.deposits[i-1].depositoption_set[j-1].save_trm }}</p>
-                            <hr>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div v-else>
-                      <p>적금</p>
-                      <div v-for="i in store.savings.length" :key="i">
-                        <div v-for="j in store.savings[i-1].savingoption_set.length" :key="j">
-                          <div v-if="store.savings[i-1].savingoption_set[j-1].id === product.savings">
-                            <p>은행명 : {{ store.savings[i-1].kor_co_nm }}</p>
-                            <p>상품명 : {{ store.savings[i-1].fin_prdt_nm }}</p>
-                            <p>가입기간 : {{ store.savings[i-1].savingoption_set[j-1].save_trm }}</p>
-                            <hr>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
           </tbody>
         </table>
-        <div class="form-row center">
+
+        <div class="submitbtn">
           <button class="buttons" type="submit">저장</button>
+        </div>
+        <div class="lists">
+          <h3 style="font-weight:bold; text-align:left;">가입한 상품 리스트</h3>
+          <hr>
+          <div style="text-align:left;" v-for="product in store.financial_products">
+            <div v-if="product.deposits">
+              <div v-for="i in store.deposits.length" :key="i">
+                <div v-for="j in store.deposits[i-1].depositoption_set.length" :key="j">
+                  <div v-if="store.deposits[i-1].depositoption_set[j-1].id === product.deposits">
+                    <p>(정기예금) &nbsp;{{ store.deposits[i-1].kor_co_nm }} - &nbsp;{{ store.deposits[i-1].fin_prdt_nm }}</p>
+                    <p>가입기간 : {{ store.deposits[i-1].depositoption_set[j-1].save_trm }}</p>
+                    <hr style="width: 100%;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div v-else>
+              <div v-for="i in store.savings.length" :key="i">
+                <div v-for="j in store.savings[i-1].savingoption_set.length" :key="j">
+                  <div v-if="store.savings[i-1].savingoption_set[j-1].id === product.savings">
+                    <p>(정기적금)&nbsp;{{ store.savings[i-1].kor_co_nm }} - &nbsp;{{ store.savings[i-1].fin_prdt_nm }}</p>
+                    <p>가입기간 : {{ store.savings[i-1].savingoption_set[j-1].save_trm }}</p>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+        <ChartView/>
+          
         </div>
       </form>
     </div>
@@ -138,6 +126,7 @@
   import { useRoute, useRouter } from 'vue-router';
   import axios from 'axios';
   import { useArticleStore } from '@/stores/article';
+  import ChartView from '@/views/ChartView.vue'
 
   const router = useRouter();
   const route = useRoute();
