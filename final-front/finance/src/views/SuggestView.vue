@@ -1,12 +1,12 @@
 <template>
     <div class="container">
         <h1 class="headers">추천목록</h1>
-        
-        <div v-for="i in selectedProducts.length" :key="i">
-          {{ selectedProducts[i-1] }}
+        <a href="/compare">→ 비교하러 가기</a>
+        <hr>
+        <div style="margin-bottom:10px;" v-for="i in selectedProducts.length" :key="i">
+          <li>{{ selectedProducts[i-1] }}</li>
         </div>
-
-
+        <p class="mb-0 bg-light text-center py-2 fixed-bottom" style="width: 100%; font-size: small;" >&copy; 2023 Finew All Rights Reserved. 본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</p>
     </div>
 </template>
 
@@ -57,7 +57,7 @@
              
   });
 
-  // console.log(selectedProducts.value)
+  console.log(selectedProducts.value)
   
   // // 콘솔 확인
   //   console.log(store.users)
@@ -75,19 +75,12 @@
 </script>
 
 
-
-
-
-
-
-
-
 <style scoped>
 .headers{
   color: #255580;
   font-weight: bold;
   margin-top: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .container{
   font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */

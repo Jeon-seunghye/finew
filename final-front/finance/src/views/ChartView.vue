@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h2>가입 상품 금리</h2>
+        <h2 style="font-weight:bold; text-align:left;">- 가입 상품 금리</h2>
         
-        <p>예금 금리</p>
-        <div style="width:800px">
+        <h2 style="margin-top: 40px; font-weight: bold;">예금 금리</h2>
+        <div style="width:100%;">
             <canvas ref="depositChartCanvas"></canvas>
         </div>
-        <p>적금 금리</p>
-        <div style="width:800px">
+        <h2 style="margin-top: 50px; font-weight: bold;">적금 금리</h2>
+        <div style="width:100%">
             <canvas ref="savingChartCanvas"></canvas>
         </div>
         <!-- <div v-for="i in deposit_b_name.length" :key="i">
@@ -71,7 +71,6 @@
                 saving_b_name.value.push(store.savings[i].kor_co_nm)
                 saving_rate1.value.push(store.savings[i].savingoption_set[j].intr_rate)
                 saving_rate2.value.push(store.savings[i].savingoption_set[j].intr_rate2)
-                console.log(store.savings[i].fin_prdt_nm)
                 saving_fin_prdt_nm.value.push(store.savings[i].fin_prdt_nm)
               }
             }
@@ -83,14 +82,14 @@
               labels: deposit_fin_prdt_nm.value,
               datasets: [
                 {
-                  label: 'Deposit Rate 1',
+                  label: '일반 금리',
                   data: deposit_rate1.value,
                   backgroundColor: 'rgba(255, 99, 132, 0.2)',
                   borderColor: 'rgba(255,99,132,1)',
                   borderWidth: 1,
                 },
                 {
-                  label: 'Deposit Rate 2',
+                  label: '최고 우대 금리',
                   data: deposit_rate2.value,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
@@ -103,14 +102,14 @@
         labels: saving_fin_prdt_nm.value,
         datasets: [
           {
-            label: 'Saving Rate 1',
+            label: '일반 금리',
             data: saving_rate1.value,
             backgroundColor: 'rgba(255, 206, 86, 0.2)',
             borderColor: 'rgba(255, 206, 86, 1)',
             borderWidth: 1,
           },
           {
-            label: 'Saving Rate 2',
+            label: '최고 우대 금리',
             data: saving_rate2.value,
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
