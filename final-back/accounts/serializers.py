@@ -5,6 +5,7 @@ from allauth.account.adapter import get_adapter
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from django.contrib.auth import get_user_model
 from .models import *
+from banks.serializers import *
 
 
 
@@ -55,6 +56,14 @@ class CustomUserUpdateSerializer(serializers.ModelSerializer):
 
 
 class FinancialProductSerializer(serializers.ModelSerializer):
+    depositbase_set = DepositBaseSerializers(many=True, read_only=True)
+
     class Meta:
         model = FinancialProduct
+        fields = '__all__'
+
+
+class MyPreferenceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyPreference
         fields = '__all__'

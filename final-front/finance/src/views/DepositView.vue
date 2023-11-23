@@ -44,6 +44,7 @@
   // 예금 정보 가져오기
   onMounted(() => {
     store.getDeposit()
+    search()
   })
 
 

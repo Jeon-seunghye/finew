@@ -15,6 +15,7 @@
     <div v-for="(option, index) in selectedSaving.savingoption_set" :key="option.id">
       <h3>{{ index + 1 }}번 옵션</h3>
       <p>저축 기간 : {{ option.save_trm }}개월</p>
+      <p>저축 금리 유형 : {{ option.intr_rate_type_nm }}</p>
       <p>저축 금리 : {{ option.intr_rate }}[%]</p>
       <p>최고 우대금리 : {{ option.intr_rate2 }}[%]</p>
       <button @click="store.addSavingCart(option.id)">

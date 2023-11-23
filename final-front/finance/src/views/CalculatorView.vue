@@ -8,7 +8,7 @@
             <label for="selectTemp1">기존 화폐</label>
           </div>
           <div class="input-select-wrapper">
-            <input type="number" placeholder="입력" v-model="inputTemp" @input="calculateExchange">
+            <input type="number" placeholder="입력" v-model="inputTemp" @input="calculateExchange" style="width: 64%;">
             <select id="selectTemp1" v-model="selectedTemp1" @change="setSelectedTemp1(selectedTemp1)">
               <option v-for="exchange_rate1 in exchange_rates" :key="exchange_rate1.id">
                 {{ exchange_rate1.cur_unit }} : {{ exchange_rate1.cur_nm }}
