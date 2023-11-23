@@ -60,27 +60,27 @@ def financial_product_list(request):
         serializer = FinancialProductSerializer(products, many=True)
         return Response(serializer.data)
     
-# 유저 선호 조회/생성/수정
-@api_view(['GET', 'POST', 'PUT'])
-@authentication_classes([TokenAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
-def my_preference(request):
-    # 조회
-    if request.method == 'GET':
-        mypreference = MyPreference.objects.filter(user_id=request.user.pk)
-        serializer = MyPreferenceSerializer(mypreference, data=request.data)
-        return Response(serializer.data)
-    # 생성
-    elif request.method == 'POST':
-        serializer = MyPreferenceSerializer(data=request.data, partial=True)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+# # 유저 선호 조회/생성/수정
+# @api_view(['GET', 'POST', 'PUT'])
+# @authentication_classes([TokenAuthentication, BasicAuthentication])
+# @permission_classes([IsAuthenticated])
+# def my_preference(request):
+#     # 조회
+#     if request.method == 'GET':
+#         mypreference = MyPreference.objects.filter(user_id=request.user.pk)
+#         serializer = MyPreferenceSerializer(mypreference, data=request.data)
+#         return Response(serializer.data)
+#     # 생성
+#     elif request.method == 'POST':
+#         serializer = MyPreferenceSerializer(data=request.data, partial=True)
+#         if serializer.is_valid(raise_exception=True):
+#             serializer.save(user=request.user)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
     
-    # 수정
-    elif request.method == 'PUT':
-        mypreference = MyPreference.objects.get(user_id=request.user.pk, partial=True)
-        serializer = MyPreferenceSerializer(mypreference, data=request.data, partial=True)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user)
-            return Response(serializer.data)
+#     # 수정
+#     elif request.method == 'PUT':
+#         mypreference = MyPreference.objects.get(user_id=request.user.pk, partial=True)
+#         serializer = MyPreferenceSerializer(mypreference, data=request.data, partial=True)
+#         if serializer.is_valid(raise_exception=True):
+#             serializer.save(user=request.user)
+#             return Response(serializer.data)

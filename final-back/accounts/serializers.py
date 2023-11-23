@@ -16,6 +16,10 @@ class CustomRegisterSerializer(RegisterSerializer):
     money = serializers.IntegerField(required=False)
     salary = serializers.IntegerField(required=False)
     email = serializers.EmailField(required=False)
+    kor_co_nm = serializers.CharField(required=False,allow_blank=True,max_length=99,)
+    join_way = serializers.CharField(required=False,allow_blank=True,max_length=99,)
+    intr_rate_type_nm = serializers.CharField(required=False,allow_blank=True,max_length=99,)
+
     financial_products = serializers.ListField(child=serializers.IntegerField(), required=False)
 
     def get_cleaned_data(self):
@@ -27,6 +31,12 @@ class CustomRegisterSerializer(RegisterSerializer):
             'money': self.validated_data.get('money',''),
             'salary': self.validated_data.get('salary',''),
             'email': self.validated_data.get('email',''),
+            'kor_co_nm': self.validated_data.get('kor_co_nm',''),
+            'join_way': self.validated_data.get('join_way',''),
+            'intr_rate_type_nm': self.validated_data.get('email',''),
+
+
+
             'financial_products': self.validated_data.get('financial_products',''),
             }
     
@@ -44,6 +54,11 @@ class CustomRegisterSerializer(RegisterSerializer):
         instance.money = validated_data.get('money', instance.money)
         instance.salary = validated_data.get('salary', instance.salary)
         instance.email = validated_data.get('email', instance.email)
+
+        instance.kor_co_nm = validated_data.get('kor_co_nm', instance.kor_co_nm)
+        instance.join_way = validated_data.get('join_way', instance.join_way)
+        instance.intr_rate_type_nm = validated_data.get('intr_rate_type_nm', instance.intr_rate_type_nm)
+
         instance.financial_product = validated_data.get('financial_product', instance.financial_product)
         
         instance.save()
@@ -63,7 +78,7 @@ class FinancialProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class MyPreferenceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MyPreference
-        fields = '__all__'
+# class MyPreferenceSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = MyPreference
+#         fields = '__all__'

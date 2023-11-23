@@ -27,6 +27,65 @@
               <td><label for="newMoney">자산</label></td>
               <td><input v-model.trim="user.money" id="newMoney" /></td>
             </tr>
+
+            <tr>
+              <td><label for="newKor_co_nm">주거래 은행</label></td>
+              <td>
+                <select id="newKor_co_nm" v-model.trim="user.kor_co_nm">
+                  <option value="우리은행">우리은행</option>
+                  <option value="한국스탠다드차타드은행">한국스탠다드차타드은행</option>
+                  <option value="대구은행">대구은행</option>
+                  <option value="부산은행">부산은행</option>
+                  <option value="광주은행">광주은행</option>
+                  <option value="제주은행">제주은행</option>
+                  <option value="전북은행">전북은행</option>
+                  <option value="경남은행">경남은행</option>
+                  <option value="중소기업은행">중소기업은행</option>
+                  <option value="한국산업은행">한국산업은행</option>
+                  <option value="국민은행">우리은행</option>
+                  <option value="신한은행">신한은행</option>
+                  <option value="농협은행주식회사">농협은행주식회사</option>
+                  <option value="하나은행">하나은행</option>
+                  <option value="주식회사 케이뱅크">주식회사 케이뱅크</option>
+                  <option value="수협은행">수협은행</option>
+                  <option value="주식회사 카카오뱅크">주식회사 카카오뱅크</option>
+                  <option value="토스뱅크 주식회사">토스뱅크 주식회사</option>
+                </select>
+            </td>
+            </tr>
+            
+            <tr>
+              <td><label for="newJoin_way">선호 가입 경로</label></td>
+              <td>
+                <select v-model.trim="user.join_way" id="newJoin_way">
+                  <option value="영업점">영업점</option>
+                  <option value="스마트폰">스마트폰</option>
+                  <option value="전화">전화</option>
+                  <option value="인터넷">인터넷</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td><label for="newIntr_rate_type_nm">선호 금리 유형</label></td>
+              <td>
+                <select v-model.trim="user.intr_rate_type_nm" id="newIntr_rate_type_nm">
+                  <option value="단리">단리</option>
+                  <option value="복리">복리</option>
+                </select>
+              </td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
             <tr>
               <td colspan="2">
                 <div class="lists">
@@ -83,7 +142,7 @@
   const router = useRouter();
   const route = useRoute();
   const store = useArticleStore();
-  const user = ref({ nickname: '', age: '' , email: '' , salary: '' , money: ''});
+  const user = ref({ nickname: '', age: '' , email: '' , salary: '' , money: '' , kor_co_nm: '' , join_way: '' , intr_rate_type_nm: ''});
 
   onMounted(() => {
     axios
@@ -111,6 +170,9 @@
           email: user.value.email,
           salary: user.value.salary,
           money: user.value.money,
+          kor_co_nm: user.value.kor_co_nm,
+          join_way: user.value.join_way,
+          intr_rate_type_nm: user.value.intr_rate_type_nm,
         },
         {
           headers: {

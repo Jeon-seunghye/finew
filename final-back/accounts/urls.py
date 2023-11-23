@@ -6,6 +6,6 @@ urlpatterns = [
     path('financial_product/deposit/<int:deposit_id>/', views.financial_products_deposit), # 예금 상품 가입
     path('financial_product/saving/<int:saving_id>/', views.financial_products_saving), # 적금 상품 가입
     path('financial_product/', views.financial_product_list),   # 유저별 상품가입목록 가져오기
-    path('mypreference/', views.my_preference),   # 유저별 상품가입목록 가져오기
+    # path('mypreference/', views.my_preference),   # 유저별 상품가입목록 가져오기
 
 ]

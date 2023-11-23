@@ -16,8 +16,12 @@ class User(AbstractUser):
     age = models.IntegerField(null=True, blank=True) # 나이
     money = models.IntegerField(null=True, blank=True)   # 재산(잔고)
     salary = models.IntegerField(null=True, blank=True)  # 연봉
+    kor_co_nm = models.CharField(max_length=99, blank=True, null=True)
+    join_way = models.CharField(max_length=99, blank=True, null=True)
+    intr_rate_type_nm = models.CharField(max_length=99, blank=True, null=True)
     deposit_options = models.ManyToManyField(DepositOption, through='FinancialProduct', related_name='users', blank=True)
     saving_options = models.ManyToManyField(SavingOption, through='FinancialProduct', related_name='users', blank=True)
+
 
     # superuser fields
     is_active = models.BooleanField(default=True)
@@ -40,8 +44,13 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         age = data.get("age")
         money = data.get("money")
         salary = data.get("salary")
+        kor_co_nm = data.get("kor_co_nm")
+        join_way = data.get("join_way")
+        intr_rate_type_nm = data.get("intr_rate_type_nm")
         deposit_options = data.get("deposit_options")
         saving_options = data.get("saving_options")
+
+
 
 
         user_email(user, email)
@@ -58,12 +67,13 @@ class CustomAccountAdapter(DefaultAccountAdapter):
             user.money = money
         if salary:
             user.salary = salary
-        # if financial_product:
-        #     financial_products = user.financial_products.split(',')
-        #     financial_products.append(financial_product)
-        #     if len(financial_products) > 1:
-        #         financial_products = ','.join(financial_products)
-        #     user_field(user,"financial_products", financial_products)
+        if kor_co_nm:
+            user.kor_co_nm = kor_co_nm
+        if join_way:
+            user.join_way = join_way
+        if intr_rate_type_nm:
+            user.intr_rate_type_nm = intr_rate_type_nm
+
         if "password1" in data:
             user.set_password(data["password1"])
         else:
@@ -81,8 +91,8 @@ class FinancialProduct(models.Model):
     savings = models.ForeignKey(SavingOption, on_delete = models.CASCADE, null=True)
 
 
-class MyPreference(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
-    kor_co_nm = models.TextField()
-    join_way = models.TextField()
-    intr_rate_type_nm = models.TextField()
+# class MyPreference(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+#     kor_co_nm = models.TextField()
+#     join_way = models.TextField()
+#     intr_rate_type_nm = models.TextField()
