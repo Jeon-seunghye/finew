@@ -11,8 +11,8 @@ from banks.models import *
 class User(AbstractUser):
     # pass
     username = models.CharField(max_length=30, unique=True)
-    nickname = models.CharField(max_length=255, blank=True, null=True)
-    email = models.EmailField(max_length=254, blank=True, null=True)
+    nickname = models.CharField(max_length=255, blank=True, null=True, unique=True)
+    email = models.EmailField(max_length=254, blank=True, null=True, unique=True)
     age = models.IntegerField(null=True, blank=True) # 나이
     money = models.IntegerField(null=True, blank=True)   # 재산(잔고)
     salary = models.IntegerField(null=True, blank=True)  # 연봉

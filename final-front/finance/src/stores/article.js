@@ -176,6 +176,7 @@ export const useArticleStore = defineStore('article', () => {
 
       })
       .catch((error) => {
+        alert('회원가입 실패')
         console.log(error)
       })
   }
