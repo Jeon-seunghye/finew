@@ -153,6 +153,7 @@
       })
       .then((res) => {
         user.value = res.data;
+        store.users.value = res.data
       })
       .catch((err) => {
         console.error(err);
