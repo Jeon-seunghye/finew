@@ -46,7 +46,7 @@ const router = useRouter()
     font-size: xx-large;
     font-weight: 900;
     text-align: center;
-    background-image: url('@/assets/bgmap.jpg');
+    background-image: url('@/assets/bg1.jpg');
     background-size: cover;
     height: 150px;
     display: flex;

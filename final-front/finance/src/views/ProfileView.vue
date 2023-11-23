@@ -30,7 +30,7 @@
 
             <tr>
               <td><label for="newKor_co_nm">주거래 은행</label></td>
-              <td>
+              <td style="text-align:left;">
                 <select id="newKor_co_nm" v-model.trim="user.kor_co_nm">
                   <option value="우리은행">우리은행</option>
                   <option value="한국스탠다드차타드은행">한국스탠다드차타드은행</option>
@@ -55,8 +55,8 @@
             </tr>
             
             <tr>
-              <td><label for="newJoin_way">선호 가입 경로</label></td>
-              <td>
+              <td><label for="newJoin_way">선호가입경로</label></td>
+              <td style="text-align:left;">
                 <select v-model.trim="user.join_way" id="newJoin_way">
                   <option value="영업점">영업점</option>
                   <option value="스마트폰">스마트폰</option>
@@ -67,8 +67,8 @@
             </tr>
 
             <tr>
-              <td><label for="newIntr_rate_type_nm">선호 금리 유형</label></td>
-              <td>
+              <td><label for="newIntr_rate_type_nm">선호금리유형</label></td>
+              <td style="text-align:left;">
                 <select v-model.trim="user.intr_rate_type_nm" id="newIntr_rate_type_nm">
                   <option value="단리">단리</option>
                   <option value="복리">복리</option>
@@ -82,15 +82,18 @@
           <button class="buttons" type="submit">저장</button>
         </div>
         <div class="lists">
-          <h3 style="font-weight:bold; text-align:left;">가입한 상품 리스트</h3>
+          <div class="check">
+            <h2 style="font-weight:bold; text-align:left; margin-top: 50px; margin-right: 30px;">- 가입 상품 리스트</h2>
+            <a href="/compare">→ 추가하러 가기</a>
+          </div>
           <hr>
-          <div style="text-align:left;" v-for="product in store.financial_products">
+          <div style="text-align:left;" v-for="(product, index) in store.financial_products">
             <div v-if="product.deposits">
               <div v-for="i in store.deposits.length" :key="i">
                 <div v-for="j in store.deposits[i-1].depositoption_set.length" :key="j">
                   <div v-if="store.deposits[i-1].depositoption_set[j-1].id === product.deposits">
-                    <p>(정기예금) &nbsp;{{ store.deposits[i-1].kor_co_nm }} - &nbsp;{{ store.deposits[i-1].fin_prdt_nm }}</p>
-                    <p>가입기간 : {{ store.deposits[i-1].depositoption_set[j-1].save_trm }}</p>
+                    <a>{{index + 1 }}.&nbsp(정기예금) &nbsp;{{ store.deposits[i-1].kor_co_nm }} - &nbsp;{{ store.deposits[i-1].fin_prdt_nm }}</a>
+                    <p>가입기간 : {{ store.deposits[i-1].depositoption_set[j-1].save_trm }} 개월</p>
                     <hr style="width: 100%;">
                   </div>
                 </div>
@@ -101,8 +104,8 @@
               <div v-for="i in store.savings.length" :key="i">
                 <div v-for="j in store.savings[i-1].savingoption_set.length" :key="j">
                   <div v-if="store.savings[i-1].savingoption_set[j-1].id === product.savings">
-                    <p>(정기적금)&nbsp;{{ store.savings[i-1].kor_co_nm }} - &nbsp;{{ store.savings[i-1].fin_prdt_nm }}</p>
-                    <p>가입기간 : {{ store.savings[i-1].savingoption_set[j-1].save_trm }}</p>
+                    <p>{{index + 1 }}.&nbsp(정기적금)&nbsp;{{ store.savings[i-1].kor_co_nm }} - &nbsp;{{ store.savings[i-1].fin_prdt_nm }}</p>
+                    <p>가입기간 : {{ store.savings[i-1].savingoption_set[j-1].save_trm }} 개월</p>
                     <hr>
                   </div>
                 </div>
@@ -110,10 +113,10 @@
             </div>
           </div>
         </div>
-        <div>
+      <div>
         <ChartView/>
           
-        </div>
+      </div>
       </form>
     </div>
   </main>
@@ -186,10 +189,14 @@
 
 
 <style scoped>
-
+.check{
+  display: flex;
+  align-items: baseline;
+}
 .lists{
   display: flex;
   flex-direction: column;
+  margin-bottom: 40px;
 }
   .table{
     margin-left: 20px;
@@ -204,6 +211,7 @@
     align-items: center;
     flex-direction: column;
     margin-top: 100px;
+    font-family: 'Noto Sans KR', sans-serif;
     
   }
   .buttons{

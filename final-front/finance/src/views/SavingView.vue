@@ -1,36 +1,53 @@
 <template>
   <div id="nav">
-    <h1>적금</h1>
+    <div class="contain">
+      <a href="/deposit" class="headers3 ">예금</a>
+      <a href="/saving" class="headers4">적금</a>
+    </div>
     <hr>
     <div>
-      <h3>검색</h3>
-      <div>
-        <select v-model="selectedBank" name="bank_name" id="bank_name">
+      <div class="form-group">
+        <h3 style="margin-left: 60px;">은행 검색</h3>
+      </div>
+      <div class="contain2">
+        <select v-model="selectedBank" name="bank_name" id="bank_name" class="form-control">
           <option v-for="bankName in setBankNames" :key="bankName">
             {{ bankName }}
           </option>
         </select>
-      </div>
-      <div>
-        <button @click="search">검색</button>
+        <button @click="search" class="btn btn-primary search">검색</button>
       </div>
     </div>
 
     <br>
-
-    <div>
+    <div style="margin-inline: 40px; padding-inline: 50px;">
       <h1>목록</h1>
       <hr>
-      <div v-for="saving in filteredSavings" :key="saving.id">
-        <p>공시 제출일 : {{ saving.dcls_month }}</p>
-        <p>금융회사명 : {{ saving.kor_co_nm }}</p>
-        <p>상품명 : {{ saving.fin_prdt_nm }}</p>
-        <button class="view-detail-button" @click="goDetail(saving.fin_prdt_cd)">게시글 상세 보기</button>
-        <hr>
-      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>공시 제출일</th>
+            <th>금융회사명</th>
+            <th>상품명</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr class="lineup" v-for="saving in filteredSavings" :key="saving.id">
+            <td>{{ saving.dcls_month }}</td>
+            <td>{{ saving.kor_co_nm }}</td>
+            <td>{{ saving.fin_prdt_nm }}</td>
+            <td>
+              <button class="btn btn-secondary" style="opacity: 70%;" @click="goDetail(saving.fin_prdt_cd)">게시글 상세 보기</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mb-0 bg-light text-center py-2" style="width: 100%; font-size: small;" >&copy; 2023 Finew All Rights Reserved. 본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</p>
 
     </div>
   </div>
+
 </template>
 
 
@@ -80,3 +97,50 @@
 
 
 </script>
+
+<style>
+  .headers3{
+    color: #255580;
+    opacity: 50%;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    margin-right: -100px;
+  }
+  .headers4{
+    color: #255580;
+    
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    font-size: xxx-large;
+    margin-left: -100px;
+  }
+  .contain2{
+    display: flex;
+    margin-left: 60px;
+    margin-right: 60px;
+    flex-direction: row;
+  }
+
+  .contain{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+  }
+
+  .search{
+    margin-left: 30px;
+    width: 100px;
+    opacity: 70%;
+  }
+  tr th,
+  tr td{
+    text-align: center;
+  }
+</style>

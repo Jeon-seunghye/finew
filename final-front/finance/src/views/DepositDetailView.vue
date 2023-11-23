@@ -1,28 +1,38 @@
 <template>
   <div>
-    <h1>예금 상세</h1>
-    <div>
-      <p>공시 제출일 : {{ selectedDeposit.dcls_month }}</p>
-      <p>금융회사명 : {{ selectedDeposit.kor_co_nm }}</p>
-      <p>상품명 : {{ selectedDeposit.fin_prdt_nm }}</p>
-      <p>상품 코드 : {{ fin_prdt_cd }}</p>
-      <p>가입 방법 : {{ selectedDeposit.join_way }}</p>
-      <p>가입 대상 : {{ selectedDeposit.join_member }}</p>
-      <p>우대 조건 : {{ selectedDeposit.spcl_cnd }}</p>
-      <p>기타 유의사항 : {{ selectedDeposit.etc_note }}</p>
+    <a class="icon-link icon-link-hover boardlist" style="--bs-link-hover-color-rgb: 25, 135, 84; margin-top: 20px; margin-left: 30px;" href="/deposit">
+      ← 예금 목록
+      <svg class="bi" aria-hidden="true"></svg>
+    </a>
+    <div class="container">
+      <div class="info-container">
+        <h1 class="header">예금 상세</h1>
+        <p><strong>공시 제출일 :</strong> {{ selectedDeposit.dcls_month }}</p>
+        <p><strong>금융회사명 :</strong> {{ selectedDeposit.kor_co_nm }}</p>
+        <p><strong>상품명 :</strong> {{ selectedDeposit.fin_prdt_nm }}</p>
+        <p><strong>상품 코드 :</strong> {{ fin_prdt_cd }}</p>
+        <p><strong>가입 방법 :</strong> {{ selectedDeposit.join_way }}</p>
+        <p><strong>가입 대상 :</strong> {{ selectedDeposit.join_member }}</p>
+        <p><strong>우대 조건 :</strong> {{ selectedDeposit.spcl_cnd }}</p>
+        <p><strong>기타 유의사항 :</strong> {{ selectedDeposit.etc_note }}</p>
+      </div>
+      <div class="option-container">
+        <div v-for="(option, index) in selectedDeposit.depositoption_set" :key="option.id" class="option-item">
+          <h3 style="margin-left: 40px;">{{ index + 1 }}번 옵션</h3>
+          <div class="option-details">
+            <p><strong>저축 기간 :</strong> {{ option.save_trm }}개월</p>
+            <p><strong>저축 금리 유형 :</strong> {{ option.intr_rate_type_nm }}</p>
+            <p><strong>저축 금리 :</strong> {{ option.intr_rate }}[%]</p>
+            <p><strong>최고 우대금리 :</strong> {{ option.intr_rate2 }}[%]</p>
+            <button @click="store.addDepositCart(option.id)" class="option-button">
+              {{ isAdded(option.id) ? '가입취소' : '가입하기' }}
+            </button>
+          </div>
+          <hr class="option-divider">
+        </div>
+      </div>
     </div>
-    <hr>
-    <div v-for="(option, index) in selectedDeposit.depositoption_set" :key="option.id">
-      <h3>{{ index + 1 }}번 옵션</h3>
-      <p>저축 기간 : {{ option.save_trm }}개월</p>
-      <p>저축 금리 유형 : {{ option.intr_rate_type_nm }}</p>
-      <p>저축 금리 : {{ option.intr_rate }}[%]</p>
-      <p>최고 우대금리 : {{ option.intr_rate2 }}[%]</p>
-      <button @click="store.addDepositCart(option.id)">
-        {{ isAdded(option.id) ? '가입취소' : '가입하기' }}
-      </button>
-      <hr>
-    </div>
+    <p class="mb-0 bg-light text-center py-2" style="width: 100%; font-size: small;" >&copy; 2023 Finew All Rights Reserved. 본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</p>
   </div>
 </template>
 
@@ -66,4 +76,59 @@
 
 
 <style scoped>
+
+.container{
+  font-family: 'Noto Sans KR', sans-serif; /* Noto Sans KR 글씨체 적용 */
+  margin-top: 40px;
+  display: flex;
+}
+.header {
+  margin-bottom: 40px;
+  color: #255580;
+  font-weight: bold;
+}
+
+.info-container {
+  margin-bottom: 20px;
+  width: 400px;
+}
+.option-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 60px;
+  margin-left: 70px;
+}
+
+.option-item {
+  width: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.option-details {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 40px;
+}
+
+.option-button {
+  margin-left: 40px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.option-divider {
+  margin-top: 10px;
+}
+
+
+.btn:hover {
+  background-color: #0056b3;
+}
 </style>
