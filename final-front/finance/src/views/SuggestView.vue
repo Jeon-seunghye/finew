@@ -22,9 +22,8 @@
   const store = useArticleStore();
 
 
-
   //  선택된 상품을 담을 변수
-   const selectedProducts = ref([]);
+  const selectedProducts = ref([]);
 
   // onMounted 내부에서 상품 추천 받기 로직을 실행
   onMounted(() => {
@@ -57,20 +56,20 @@
              
   });
 
-  console.log(selectedProducts.value)
+  // console.log(selectedProducts.value)
   
-  // // 콘솔 확인
-  //   console.log(store.users)
-  //   console.log(store.users.nickname)
-  //   console.log(store.users.value.kor_co_nm)
-  //   console.log(store.users.value.join_way)
-  //   console.log(store.users.value.intr_rate_type_nm)
+  // 콘솔 확인
+    // console.log(store.users)
+    // console.log(store.users.nickname)
+    // console.log(store.users.value.kor_co_nm)
+    // console.log(store.users.value.join_way)
+    // console.log(store.users.value.intr_rate_type_nm)
 
-  //   // console.log(store.deposits)
-  //   console.log(store.deposits[0].kor_co_nm)
-  //   console.log(store.deposits[0].join_way)
-  //   console.log(store.deposits[0].depositoption_set[0].intr_rate_type_nm)
-  // //
+    // console.log(store.deposits)
+    console.log(store.deposits[0].kor_co_nm)
+    console.log(store.deposits[0].join_way)
+    console.log(store.deposits[0].depositoption_set[0].intr_rate_type_nm)
+  //
   
 </script>
 

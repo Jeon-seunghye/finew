@@ -7,13 +7,6 @@ from django.shortcuts import render
 from .serializers import *
 from .models import *
 
-# 인증이 필요한 요소들에게 데코레이터 등록 (401)
-## @authentication_classes([TokenAuthentication, BasicAuthentication])
-
-# 권한 정책 설정 (403)
-## @permission_classes([IsAuthenticated])
-
-
 # 게시글
 @api_view(['GET', 'POST'])
 @authentication_classes([TokenAuthentication, BasicAuthentication])

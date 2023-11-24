@@ -10,7 +10,6 @@ from banks.serializers import *
 
 
 class CustomRegisterSerializer(RegisterSerializer):
-    # 추가할 필드들을 정의합니다.
     nickname = serializers.CharField(required=False,allow_blank=True,max_length=255,)
     age = serializers.IntegerField(required=False)
     money = serializers.IntegerField(required=False)
@@ -76,9 +75,3 @@ class FinancialProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = FinancialProduct
         fields = '__all__'
-
-
-# class MyPreferenceSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = MyPreference
-#         fields = '__all__'

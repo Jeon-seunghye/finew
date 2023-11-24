@@ -68,6 +68,7 @@
       }
       store.signUp(payload)
   }
+
 </script>
 
 

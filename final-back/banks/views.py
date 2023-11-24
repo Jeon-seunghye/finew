@@ -10,12 +10,6 @@ from .models import *
 import requests
 
 
-# 인증이 필요한 요소들에게 데코레이터 등록 (401)
-## @authentication_classes([TokenAuthentication, BasicAuthentication])
-# 권한 정책 설정 (403)
-## @permission_classes([IsAuthenticated])
-
-
 # open API 받아와서 저장
 ## 예금
 @api_view(['GET'])

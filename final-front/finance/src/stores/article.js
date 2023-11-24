@@ -91,7 +91,7 @@ export const useArticleStore = defineStore('article', () => {
         Authorization: `Token ${token.value}`
       }
     })
-    .then(res => articles.value = res.data)
+      .then(res => articles.value = res.data)
   }
 
   // 게시글 생성 함수
@@ -107,13 +107,13 @@ export const useArticleStore = defineStore('article', () => {
         Authorization: `Token ${token.value}`
       }
     })
-    .then((res) => {
-      console.log(res)
-      router.push({name:'board'})
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+      .then((res) => {
+        console.log(res)
+        router.push({name:'board'})
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   // 댓글 정보 가져오기
@@ -125,7 +125,7 @@ export const useArticleStore = defineStore('article', () => {
         Authorization: `Token ${token.value}`
       }
     })
-    .then(res => comments.value = res.data)
+      .then(res => comments.value = res.data)
   }
 
   // 회원 정보 가져오기
@@ -137,7 +137,7 @@ export const useArticleStore = defineStore('article', () => {
         Authorization: `Token ${token.value}`
       }
     })
-    .then(res => users.value = res.data)
+      .then(res => users.value = res.data)
   }
 
   // 회원정보 수정하기
@@ -149,7 +149,7 @@ export const useArticleStore = defineStore('article', () => {
         Authorization: `Token ${token.value}`
       }
     })
-    .then(res => users.value = res.data)
+      .then(res => users.value = res.data)
   }
 
   // 회원가입 함수
@@ -221,108 +221,108 @@ export const useArticleStore = defineStore('article', () => {
       })
   }
 
-    // 환율 정보 가져오기
-    const getExchangeRate = function () {
-      axios({
-        method: 'get',
-        url: `${API_URL}/banks/exchange_rate/`,
-        headers: {
-          Authorization: `Token ${token.value}`
-        }
-      })
+  // 환율 정보 가져오기
+  const getExchangeRate = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/banks/exchange_rate/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
       .then((res) => {
         exchange_rates.value = res.data
       })
       .catch((err) => {
         console.log(err)
       })
-    }
+  }
 
-    // 예금 정보 가져오기 (base, option)
-    const getDeposit = function () {
-      axios({
-        method: 'get',
-        url: `${API_URL}/banks/deposits/`,
-        headers: {
-          Authorization: `Token ${token.value}`
-        }
-      })
+  // 예금 정보 가져오기 (base, option)
+  const getDeposit = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/banks/deposits/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
       .then((res) => {
         deposits.value = res.data
       })
       .catch((err) => {
         console.log(err)
       })
-    }
-    // 적금 정보 가져오기 (base, option)
-    const getSaving = function () {
-      axios({
-        method: 'get',
-        url: `${API_URL}/banks/savings/`,
-        headers: {
-          Authorization: `Token ${token.value}`
-        }
-      })
+  }
+  // 적금 정보 가져오기 (base, option)
+  const getSaving = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/banks/savings/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
       .then((res) => {
         savings.value = res.data
       })
       .catch((err) => {
         console.log(err)
       })
-    }
+  }
 
-    // 상품 가입 목록 정보 가져오기
-    const getFinancialProducts = function () {
-      axios({
-        method: 'get',
-        url: `${API_URL}/user/financial_product/`,
-        headers: {
-          Authorization: `Token ${token.value}`
-        }
-      })
+  // 상품 가입 목록 정보 가져오기
+  const getFinancialProducts = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/user/financial_product/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
       .then((res) => {
         financial_products.value = res.data
       })
       .catch((err) => {
         console.log(err)
       })
-    }
+  }
 
-    // 예금상품 가입/취소
-    const addDepositCart = function (optionId) {
-      axios({
-        method: 'get',
-        url: `${API_URL}/user/financial_product/deposit/${optionId}/`,
-        headers: {
-          Authorization: `Token ${token.value}`
-        }
+  // 예금상품 가입/취소
+  const addDepositCart = function (optionId) {
+    axios({
+      method: 'get',
+      url: `${API_URL}/user/financial_product/deposit/${optionId}/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+      .then((res) => {
+        getFinancialProducts()
+        console.log(res)
       })
-        .then((res) => {
-          getFinancialProducts()
-          console.log(res)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
-    // 적금상품 가입/취소
-    const addSavingCart = function (optionId) {
-      axios({
-        method: 'get',
-        url: `${API_URL}/user/financial_product/saving/${optionId}/`,
-        headers: {
-          Authorization: `Token ${token.value}`
-        }
+  // 적금상품 가입/취소
+  const addSavingCart = function (optionId) {
+    axios({
+      method: 'get',
+      url: `${API_URL}/user/financial_product/saving/${optionId}/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+      .then((res) => {
+        getFinancialProducts()
+        console.log(res)
       })
-        .then((res) => {
-          getFinancialProducts()
-          console.log(res)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }  
+      .catch((error) => {
+        console.log(error)
+      })
+  }  
   return { articles, API_URL, token, isLogin, exchange_rates, comments, deposits, users, savings, financial_products, 
     getArticles, createArticle, signUp, signIn, logOut, getExchangeRate, getComments, getDeposit, updateUsers, getSaving, getUsers, getFinancialProducts, addDepositCart, addSavingCart,   }
 }, { persist: true })
