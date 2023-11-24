@@ -196,6 +196,9 @@ export const useArticleStore = defineStore('article', () => {
         console.log(response.data)
         console.log(response.data.key)
         token.value = response.data.key
+        return getUsers()
+      })
+      .then(() => {
         getDepositData()
         getSavingData()
         getExchangeRateData()

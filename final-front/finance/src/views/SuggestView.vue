@@ -27,6 +27,7 @@
 
   // onMounted 내부에서 상품 추천 받기 로직을 실행
   onMounted(() => {
+   
 
     // 상품 추천 받기 로직 (예금)
       for (let i = 0; i < store.deposits.length; i++) {        
