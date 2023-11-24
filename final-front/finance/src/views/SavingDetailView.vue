@@ -24,7 +24,7 @@
             <p><strong>저축 금리 유형 :</strong> {{ option.intr_rate_type_nm }}</p>
             <p><strong>저축 금리 :</strong> {{ option.intr_rate }}[%]</p>
             <p><strong>최고 우대금리 :</strong> {{ option.intr_rate2 }}[%]</p>
-            <button @click="store.addDepositCart(option.id)" class="option-button btn">
+            <button @click="store.addSavingCart(option.id)" class="option-button btn">
               {{ isAdded(option.id) ? '가입취소' : '가입하기' }}
             </button>
           </div>

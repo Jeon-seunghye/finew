@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# 예금 베이스
 class DepositBase(models.Model):
     dcls_month = models.TextField() # 공시제출월
     kor_co_nm = models.TextField()  # 금융회사명
@@ -13,6 +13,7 @@ class DepositBase(models.Model):
     spcl_cnd = models.TextField()   # 우대 조건
     etc_note = models.TextField()   # 기타 유의사항
 
+# 예금 옵션
 class DepositOption(models.Model):
     depositbase = models.ForeignKey(DepositBase, on_delete=models.CASCADE)
     save_trm = models.IntegerField()    # 저축기간(month)
@@ -20,7 +21,7 @@ class DepositOption(models.Model):
     intr_rate = models.FloatField() # 금리
     intr_rate2 = models.FloatField() # 우대금리
 
-
+# 적금 베이스
 class SavingBase(models.Model):
     dcls_month = models.TextField() # 공시제출월
     kor_co_nm = models.TextField()  # 금융회사명
@@ -32,6 +33,7 @@ class SavingBase(models.Model):
     spcl_cnd = models.TextField()   # 우대 조건
     etc_note = models.TextField()   # 기타 유의사항
 
+# 적금 옵션
 class SavingOption(models.Model):
     savingbase = models.ForeignKey(SavingBase, on_delete=models.CASCADE)
     save_trm = models.IntegerField()    # 저축기간(month)
@@ -39,7 +41,7 @@ class SavingOption(models.Model):
     intr_rate = models.FloatField() # 금리
     intr_rate2 = models.FloatField() # 우대금리
 
-
+# 환율 정보
 class ExchangeRate(models.Model):
     cur_unit = models.TextField()   # 통화 코드
     cur_nm = models.TextField() # 국가/통화명

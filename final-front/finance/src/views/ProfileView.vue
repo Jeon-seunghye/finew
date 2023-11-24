@@ -184,6 +184,8 @@
       });
   };
 
+
+console.log(store.users)
 </script>
 
 

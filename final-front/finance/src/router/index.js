@@ -4,6 +4,7 @@ import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import SuggestView from '@/views/SuggestView.vue'
 
 import PostView from '@/views/PostView.vue'
 import PostCreateView from '@/views/PostCreateView.vue'
@@ -18,8 +19,6 @@ import SavingDetailView from '@/views/SavingDetailView.vue'
 
 import CalculatorView from '@/views/CalculatorView.vue'
 import MapView from '@/views/MapView.vue'
-import SuggestView from '@/views/SuggestView.vue'
-
 
 
 
@@ -128,7 +127,6 @@ const router = createRouter({
       component: SavingDetailView,
       props: true
     },
-    
   ]
 })
 
